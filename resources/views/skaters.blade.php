@@ -65,15 +65,15 @@
     <form action="submitforms" enctype="multipart/form-data" method="post">
     @csrf
 
-    <select class="js-states browser-default select2" name="sqfts_id" required id="sqfts_id" style="padding: 6px; border-radius: 5px;background: khaki; padding-left: 59px;">
+    <select class="js-states browser-default select2" name="sqfts_id" required id="sqfts_id" style="padding: 6px; border-radius: 5px; padding-left: 59px;">
         <option value="option_select" disabled selected>Sqfts Available</option>
       @if(isset($dataa))
         @foreach($dataa as  $user)
-            <option style="background:khaki" value="{{ $user->id}}" >{{ $user->sqft}}</option>
+            <option  value="{{ $user->id}}" >{{ $user->sqft}}</option>
         @endforeach
     @endif
     </select>
-<button class="btn btn-warning" type="submit">Search</button>
+<button class="btn btn-primary" type="submit">Search</button>
   </form>
  
 @if(isset ($save))

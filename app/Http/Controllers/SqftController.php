@@ -14,7 +14,8 @@ class SqftController extends Controller
     public function index()
     {
         $data = Sqft::all();
-        return view('sqft', compact('data'));
+        // dd($data);
+        return view('welcome', compact('data'));
     }
     public function store(Request $request)
     {

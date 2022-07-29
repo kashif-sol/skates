@@ -4,6 +4,8 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SqftController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Setting;
+use App\Models\Sqft;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +19,9 @@ use App\Models\Setting;
 */
 
 Route::get('/', function () {
-    $settings=Setting::all();                                                                                                                                                        
-
-    return view('welcome',compact('settings'));
+    // $settings=Setting::all();                                                                                                                                                        
+    $data = Sqft::all();
+    return view('welcome',compact('data'));
 })->middleware(['verify.shopify'])->name('home');
 
 Route::get('dashbaord', function () {
@@ -31,8 +33,9 @@ Route::get('dashbaord', function () {
 
 Route::get('main', function () {
     $settings=Setting::all();
+    $data = Sqft::all();
 
-    return view('welcome',compact('settings'));
+    return view('welcome',compact('settings','data'));
 })->name('main');
 
 // Route::post('store-form', [SettingController::class, 'store']);

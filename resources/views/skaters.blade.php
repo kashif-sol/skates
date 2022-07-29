@@ -2,18 +2,18 @@
 
 
 <body>
-    <div class="buttons text-right">
-@if(!isset($country_data))
+
+    <div class="buttons text-right" style="padding-top: 8px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
+
+        <a href="{{ route('main') }}" class="btn btn-danger">Dashboard</a>
+    
+       
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Create Skater's/Sqft
         </button>
-        @endif
-        <a href="{{ route('main') }}" class="btn btn-danger">Dashboard</a>
-    @if(isset($country_data))
-        <a href="skaters" class="btn btn-primary">skater's/Sqft</a>
-    @endif
+          
     </div>
-   
+   <hr></hr>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -85,6 +85,7 @@
                 <th scope="col">Of/skater's/Sqfts</th>
                 <th scope="col">Of/Rental's/Skatersneeded</th>
                 <th scope="col">Actions</th>
+                <th></th>
                 
                 
             </tr>
@@ -97,8 +98,9 @@
 
                     <td>{{ $user->ofskaterssqfts }}</td>
                     <td>{{ $user->ofrentalskatersneeded }}</td>
-                               <td> <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $user->sqfts_id }}').submit();" class="btn btn-primary"> Delete</a> </td>
-</td><form id="delete-form-{{ $user->sqfts_id }}" + action="{{ route('skater.destroy', $user->sqfts_id) }}"
+                    <td> <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $user->sqfts_id }}').submit();" class="btn btn-primary"> Delete</a></td>
+                    <td></td>
+                        <form id="delete-form-{{ $user->sqfts_id }}" + action="{{ route('skater.destroy', $user->sqfts_id) }}"
                         method="post">
                         @csrf @method('DELETE')
                     </form>

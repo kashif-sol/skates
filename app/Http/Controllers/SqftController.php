@@ -77,7 +77,7 @@ class SqftController extends Controller
         $dataa = Sqft::with('skatersSqft')->get();
         // dd($data);
         $user = SkatersSqft::with('sqft')->get();
-
+        
         // $users=$user[0]['sqft'];
       
 

@@ -36,11 +36,13 @@
 </head>
 
 <body id="page-top">
-    <div class="buttons text-right">
-         <a href="skaters" class="btn btn-dark">Skaters</a>
-        <a href="{{ route('main') }}" class="btn btn-danger">Dashboard</a>
+    <div class="buttons text-right" style="padding-top: 8px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
+    <a href="{{ route('main') }}" class="btn btn-danger">Dashboard</a>
+         <a href="skaters" class="btn btn-primary">Skaters</a>
+        
       
     </div>
+   
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -70,6 +72,7 @@
             </div>
         </div>
     </div>
+    <h3>Sqfts Available</h3>
     <table class="table">
        
         <thead>

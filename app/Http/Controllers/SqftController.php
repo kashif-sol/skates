@@ -64,12 +64,12 @@ class SqftController extends Controller
         echo (" Record deleted successfully.");
         return redirect()->route('sqfts');
     }
-    public function destroySkater( $id)
+    public function destroySkater($id)
     {
-        dd('hello');
+        // dd('hello');
         $user = SkatersSqft::with('sqft')->where('sqfts_id', $id)->firstorfail()->delete();
         echo (" Record deleted successfully.");
-        return redirect()->back();
+        return redirect('skaters');
     }
     public function skaters()
     {
@@ -121,7 +121,7 @@ class SqftController extends Controller
         // dd($data);
         // dd($request);
         // $id=1;
-        $country_data =SkatersSqft::with('sqft')->select('ofskaterssqfts','ofrentalskatersneeded')->where('sqfts_id','=',$data)->get();
+        $country_data =SkatersSqft::with('sqft')->select('id','sqfts_id','ofskaterssqfts','ofrentalskatersneeded')->where('sqfts_id','=',$data)->get();
         // dd($country_data);
         // $product =  DB::table('sqfts')
         // ->where('id',$id)

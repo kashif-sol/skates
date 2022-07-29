@@ -84,6 +84,7 @@
             <tr class="table-light">
                 <th scope="col">Of/skater's/Sqfts</th>
                 <th scope="col">Of/Rental's/Skatersneeded</th>
+                <th scope="col">Actions</th>
                 
                 
             </tr>
@@ -93,11 +94,15 @@
             @foreach ($country_data as  $user)
                 <tr class="table-light">
              
+
                     <td>{{ $user->ofskaterssqfts }}</td>
                     <td>{{ $user->ofrentalskatersneeded }}</td>
-                   
-                   
-                
+                               <td> <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $user->sqfts_id }}').submit();" class="btn btn-primary"> Delete</a> </td>
+</td><form id="delete-form-{{ $user->sqfts_id }}" + action="{{ route('skater.destroy', $user->sqfts_id) }}"
+                        method="post">
+                        @csrf @method('DELETE')
+                    </form>
+
                   
                    
 

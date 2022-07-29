@@ -49,7 +49,7 @@ Route::get('skaters',[SqftController::class,'skaters'])->name('skaters');
 // Route::post('save_plan_description/{id}', [SqftController::class,'save_description',])->name('save_plan_description');
 Route::post('submitform',[SqftController::class,'skater_store'])->name('submitform');
 Route::post('submitforms',[SqftController::class,'skater'])->name('submitforms');
-// Route::delete('skater/{id}', [SqftController::class,'destroySkater']) ->name('skater.destroy');
+Route::delete('skater/{id}', [SqftController::class,'destroySkater']) ->name('skater.destroy');
 
 
 

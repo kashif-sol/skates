@@ -61,7 +61,7 @@
     </div>
 
 
-     @if(!isset($country_data))
+   
     <form action="submitforms" enctype="multipart/form-data" method="post">
     @csrf
 
@@ -75,26 +75,29 @@
     </select>
 <button class="btn btn-warning" type="submit">Search</button>
   </form>
-  @endif
-@if(isset ($country_data))
+ 
+@if(isset ($save))
 <h3>Data for {{$save->sqft}} sqft </h3>
+@endif
     <table class="table">
         <thead>
             <tr class="table-light">
                 <th scope="col">Of/skater's/Sqfts</th>
                 <th scope="col">Of/Rental's/Skatersneeded</th>
                 
-                <!-- <th class="table-warning">Description</th> -->
+                
             </tr>
         </thead>
         <tbody>
-
+@if(isset($country_data))
             @foreach ($country_data as  $user)
                 <tr class="table-light">
              
                     <td>{{ $user->ofskaterssqfts }}</td>
                     <td>{{ $user->ofrentalskatersneeded }}</td>
                    
+                   
+                
                   
                    
 
@@ -104,11 +107,12 @@
 
                 </tr>
             @endforeach
+            @endif
 
         </tbody>
 
     </table>
-@endif
+
 </body>
 
 </html>

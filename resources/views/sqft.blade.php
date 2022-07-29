@@ -94,14 +94,8 @@
 
                     <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
                     <td> <a class="btn btn-primary" href="" id="editCompany" data-toggle="modal"
-                            data-target='#practice_modal' data-id="{{ $setting->id }}">Edit</a> <a
-                            href="{{ route('sqfts') }}"
-                            onclick="event.preventDefault();
-                    document.getElementById(
-                      'delete-form-{{ $setting->id }}').submit();"
-                            class="btn btn-primary">
-                            Delete
-                        </a> </td>
+                            data-target='#practice_modal' data-id="{{ $setting->id }}">Edit</a> 
+                            <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $setting->id }}').submit();" class="btn btn-primary"> Delete</a> </td>
                     <td>
                     </td>
                     <form id="delete-form-{{ $setting->id }}" + action="{{ route('sqfts.destroy', $setting->id) }}"

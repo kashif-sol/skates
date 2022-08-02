@@ -20,7 +20,8 @@ class SqftController extends Controller
     public function store(Request $request)
     {
         $post = new Sqft();
-        $post->sqft = $request->sqft;
+        $post->max_sqft = $request->max_sqft;
+        $post->min_sqft = $request->min_sqft;
         // dd($post);
         $post->save();
         // return view('sqft')->with('status', 'Blog Post Form Data Has Been inserted');
@@ -47,8 +48,11 @@ class SqftController extends Controller
                 'id' => $id
             ],
             [
-                'sqft' => $request->sqft,
-            ]
+                'max_sqft' => $request->max_sqft,
+                'min_sqft' => $request->min_sqft,
+                
+            ],
+            
         );
         return response()->json(['success' => true]);
 

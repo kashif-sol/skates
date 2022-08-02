@@ -20,7 +20,7 @@
                                 <option selected>Choose...</option>
                                 @if(isset ($dataa))
                                 @foreach ($dataa as $data)
-                                    <option value="{{ $data->id }}">{{ $data->sqft }}</option>
+                                    <option value="{{ $data->id }}">{{ $data->max_sqft }}||{{$data->min_sqft}}</option>
                                 @endforeach
                                 @endif
                             </select>
@@ -55,7 +55,7 @@
         <option value="option_select" disabled selected>Sqfts Available</option>
       @if(isset($dataa))
         @foreach($dataa as  $user)
-            <option  value="{{ $user->id}}" >{{ $user->sqft}}</option>
+            <option  value="{{ $user->id}}" >{{ $user->max_sqft}}||{{ $user->min_sqft}}</option>
         @endforeach
     @endif
     </select>
@@ -63,7 +63,7 @@
   </form>
  
 @if(isset ($save))
-<h3>Data for {{$save->sqft}} sqft </h3>
+<h3>Data for {{$save->max_sqft}}||{{$save->min_sqft}} sqft </h3>
 @endif
     <table class="table">
         <thead>

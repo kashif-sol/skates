@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SqftController;
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Route;
 use App\Models\Setting;
 use App\Models\Sqft;
-
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Websie;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +55,11 @@ Route::get('skaters',[SqftController::class,'skaters'])->name('skaters');
 Route::post('submitform',[SqftController::class,'skater_store'])->name('submitform');
 Route::post('submitforms',[SqftController::class,'skater'])->name('submitforms');
 Route::delete('/skater/{id}', [SqftController::class,'destroySkater']) ->name('skater.destroy');
+// Route::get('email',function(){
+//     Mail::to('69e6230a18-92a241@inbox.mailtrap.io')->send(new WelcomeMail());
+//     return new WelcomeMail();
+// });
+Route::get('email',[Websie::class,'index']);
 
-
-
-
+Route::get('send-email', [SendEmailController::class, 'index']);
+Route::get('/get-email', [Websie::class, 'email']);

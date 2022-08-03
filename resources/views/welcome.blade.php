@@ -17,9 +17,8 @@
                         <div class="inputs" style=" padding-left: 25%;">
                             @csrf
                             <input type="hidden" name="id" id="id">
-                            <input type="text" name="max_sqft" placeholder="Maximum Sqft" style="width: 260px"><br>
-                            <br><br>
-                            <input type="text" name="min_sqft" placeholder="Minimum Sqft" style="width: 260px"><br>
+                            <input type="text" name="sqft" placeholder="Enter Sqft" style="width: 260px"><br>
+                            <br>
 
                         </div>
                         <div class="modal-footer">
@@ -42,13 +41,11 @@
               
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col">Maximum Sqft</th>
-                <th scope="col">Mininmum Sqft</th>
+                <th scope="col">SQFT</th>
+                <th scope="col"></th>
                 <th scope="col">Action</th>
                 <th scope="col" style="text-align: right"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Create Sqft </button>
 </th>
-<th scope="col"></th>
-
              
 
                 <!-- <th class="table-warning">Description</th> -->
@@ -60,8 +57,8 @@
                 <tr class="table-light">
                     <td></td>
                     <td></td>
-                    <td>{{ $setting->max_sqft }}</td>
-                    <td>{{ $setting->min_sqft }}</td>
+                    <td>{{ $setting->sqft }}</td>
+                    <td></td>
 
                     <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
                     <td> <a class="btn btn-primary" href="" id="editCompany" data-toggle="modal"
@@ -69,7 +66,6 @@
                             <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $setting->id }}').submit();" class="btn btn-primary"> Delete</a> </td>
                     <td>
                     </td>
-                    <td></td>
                     <form id="delete-form-{{ $setting->id }}" + action="{{ route('sqfts.destroy', $setting->id) }}"
                         method="post">
                         @csrf @method('DELETE')
@@ -93,7 +89,6 @@
                     <input type="hidden" id="color_id" name="color_id" value="">
                     <div class="modal-body">
                         <input type="text" name="sqft" id="sqft" value="" class="form-control">
-                        <input type="text" name="min_sqft" id="min_sqft" value="" class="form-control">
                     </div>
 
                     <div class="modal-footer">
@@ -138,18 +133,14 @@
             $('body').on('click', '#submit', function(event) {
                 event.preventDefault()
                 var id = $("#color_id").val();
-                var max_sqft = $("#sqft").val();
-                var min_sqft= $("#min_sqft").val();
+                var sqft = $("#sqft").val();
 
                 $.ajax({
                     url: 'sqfts/' + id,
                     type: "POST",
                     data: {
                         id: id,
-                        max_sqft: max_sqft,
-                        min_sqft: min_sqft
-                        
-                        
+                        sqft: sqft,
                     },
 
                     dataType: 'json',
@@ -173,8 +164,7 @@
                     $('#submit').val("Edit Sqft");
                     $('#practice_modal').modal('show');
                     $('#color_id').val(data.data.id);
-                    $('#sqft').val(data.data.max_sqft);
-                    $('#min_sqft').val(data.data.min_sqft);
+                    $('#sqft').val(data.data.sqft);
                 })
             });
 

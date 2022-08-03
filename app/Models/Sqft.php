@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sqft extends Model
 {
     use HasFactory;
-    protected $fillable = ['max_sqft','min_sqft'];
+    protected $fillable = ['sqft'];
     public function skatersSqft()
     {
         return $this->hasMany(SkatersSqft::class,'sqfts_id');

@@ -15,8 +15,7 @@ class CreateSqftsTable extends Migration
     {
         Schema::create('sqfts', function (Blueprint $table) {
             $table->id();
-            $table->string('max_sqft');
-            $table->string('min_sqft');
+            $table->string('sqft');
             $table->timestamps();
 
         });

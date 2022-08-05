@@ -32,21 +32,47 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet" />
-
+   
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Creating Dynamic Tabs in Bootstrap via Data attributes</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+        td{
+            padding: 5px;
+        }
+        th{
+            text-align: center;
+        }
+        input{
+            padding: 9px;
+            border-radius: 5px;
+            border: 1px solid #6aa1d1;
+        }
+        .focus{
+            border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: hidden;
+        background-color: #eee;
+        padding: 9px;
+        }
+        
+        </style>
+       
 </head>
 
 <body >
     <header>
     <div class="buttons text-right" style="padding-top: 27px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
-    <a href="{{ route('main') }}" class="btn btn-danger">Dashboard</a>
-         <a href="skaters" class="btn btn-primary" style="text-transform: uppercase;
-         vertical-align: bottom;
-         border: 0;
-         box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
-         font-weight: 500;
-         padding: 0.625rem 2.7rem 0.5rem;
-         font-size: .75rem;
-         line-height: 1.5;">Skaters</a>
+    <a href="{{ route('main') }}" class="btn btn-primary">SQFT</a>
+         <a href="skaters" class="btn btn-primary"
+        >Skaters</a>
+             <a href="result" class="btn btn-primary">Size</a>
+
+         
         
       
     </div>

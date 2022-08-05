@@ -63,7 +63,11 @@ Route::delete('/skater/{id}', [SqftController::class,'destroySkater']) ->name('s
 // });
 Route::get('email',[Websie::class,'index']);
 
-Route::get('send-email', [SendEmailController::class, 'index']);
 Route::get('/get-email', [Websie::class, 'email']);
 Route::get('tabs',[TabsController::class,'index']);
 Route::post('tab1',[TabsController::class,'storet1'])->name('tab1.store');
+Route::post('tab2',[TabsController::class,'storet2'])->name('tab2.store');
+Route::post('tab3',[TabsController::class,'storet3'])->name('tab3.store');
+Route::get('result',[TabsController::class,'result']);
+Route::post('tabstore',[TabsController::class,'save'])->name('tab.store');
+Route::post('update-tab', [TabsController::class, 'update']);

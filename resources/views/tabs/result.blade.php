@@ -1,0 +1,99 @@
+@include('layouts.app')
+
+
+<body>
+<div class="m-4">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="nav-item">
+            <a href="#home" class="nav-link active" data-bs-toggle="tab">Tab1</a>
+        </li>
+        <li class="nav-item">
+            <a href="#profile" class="nav-link" data-bs-toggle="tab">Tab2</a>
+        </li>
+        <li class="nav-item">
+            <a href="#messages" class="nav-link" data-bs-toggle="tab">Tab3</a>
+        </li>
+        <li class="nav-item" style="padding-left: 70%;">
+            <a href="tabs" class="btn btn-primary" >Create</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="home">
+          
+            <form action="{{url('update-tab')}}" method="POST">
+                @csrf
+                   {{ method_field('POST') }} 
+                   <input type="hidden" value="tab1" name="tab_type" >
+            <table class="mt-2">
+                <tr>
+                    <th>Size</th>
+                    <th>Figure</th>
+                    <th> Hockey</th>
+                </tr>
+          
+                @foreach($tab as $key=> $tab)
+                <tr>
+                 
+                  <td>  <input type="hidden" name="id" value="{{$tab['id']}}"></td>
+                  
+                    <td ><input type="text"  name="size" class="focus" value="{{$tab['size']}}" readonly></td>
+                    <td><input type="text" name="figure1[{{$tab['size']}}]" value="{{$tab['figure1']}}" ></td>
+                    <td><input type="text" name="figure2[{{$tab['size']}}]" value="{{$tab['figure2']}}" ></td>
+                
+                   
+                   
+                </tr> 
+                @endforeach
+            </table>
+            <button class="btn btn-primary" style="" type="submit">Save</button>
+        </form>
+             </div>
+             
+        <div class="tab-pane fade" id="profile">
+            <form action="{{url('update-tab')}}" method="POST">
+                @csrf
+                   {{ method_field('POST') }} 
+                   <input type="hidden" value="tab2" name="tab_type" >
+            <table class="mt-2">
+                <tr>
+                    <th>Size</th>
+                    <th>Figure</th>
+                </tr>
+          
+                @foreach($tab_2 as $tab)
+                <tr>
+                  
+                    <td ><input type="text" name="size" class="focus" value="{{$tab['size']}}" readonly></td>
+                    <td><input type="text" name="figure[{{$tab['size']}}]" value="{{$tab['figure']}}" ></td>
+                </tr> 
+                @endforeach
+            </table>  
+            <button class="btn btn-primary" style="" type="submit">Save</button>
+         </form>      
+        </div>
+        
+        <div class="tab-pane fade" id="messages">
+            <form action="{{url('update-tab')}}" method="POST">
+                @csrf
+                   {{ method_field('POST') }} 
+                   <input type="hidden" value="tab3" name="tab_type" >
+            <table class="mt-2">
+                <tr>
+                    <th>Size</th>
+                    <th>Hockey</th>
+                </tr>
+          
+                @foreach($tab_3 as $tab)
+                <tr>
+                  
+                    <td ><input type="text" name="size" class="focus" value="{{$tab['size']}}" readonly></td>
+                    <td><input type="text" name="hockey[{{$tab['size']}}]" value="{{$tab['hockey']}}" ></td>
+                </tr> 
+                @endforeach
+            </table>
+            <button class="btn btn-primary" style="" type="submit">Save</button>
+         </form> 
+                  </div>
+    </div>
+</div>
+</body>

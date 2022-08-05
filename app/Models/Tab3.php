@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tab3 extends Model
 {
     use HasFactory;
+    protected $fillable = ['size','hockey'];
+    public $table = "tab_3";
 }

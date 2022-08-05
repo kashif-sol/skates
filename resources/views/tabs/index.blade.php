@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     td{
-        padding: 20px;
+        padding: 5px;
     }
     th{
         text-align: center;
@@ -173,18 +173,212 @@
 
             </div>
             <div class="tab-pane fade" id="profile">
-                <h4 class="mt-2">Profile tab content</h4>
-                <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut,
-                    mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit
-                    bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in
-                    rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+                <form action="{{route('tab2.store')}}" method="POST">
+                    @csrf
+                    <table class="mt-2">
+                        <tr>
+                            <th>Size</th>
+                            <th>Figure</th>
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size" class="focus" value="8y" readonly></td>
+                            <td><input type="text" name="figure1" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size1" class="focus" value="9y" readonly></td>
+                            <td><input type="text" name="figure2" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size2"  class="focus" value="10y" readonly></td>
+                            <td><input type="text" name="figure3" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size3" class="focus" value="11y" readonly></td>
+                            <td><input type="text" name="figure4" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size4" class="focus" value="12y" readonly></td>
+                            <td><input type="text" name="figure5" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size5" class="focus" value="1" readonly></td>
+                            <td><input type="text" name="figure6" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size6"  class="focus" value="2" readonly></td>
+                            <td><input type="text" name="figure7" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size7" class="focus" value="3" readonly></td>
+                            <td><input type="text" name="figure8" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size8" class="focus" value="4" readonly></td>
+                            <td><input type="text" name="figure9" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size9" class="focus" value="5" readonly></td>
+                            <td><input type="text" name="figure10" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size10" class="focus" value="6" readonly></td>
+                            <td><input type="text" name="figure11" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size11" class="focus" value="7" readonly></td>
+                            <td><input type="text" name="figure12" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size12" class="focus" value="8" readonly></td>
+                            <td><input type="text" name="figure13" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size13" class="focus" value="9" readonly></td>
+                            <td><input type="text" name="figure14" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size14" class="focus" value="10" readonly></td>
+                            <td><input type="text" name="figure15" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size15" class="focus" value="11" readonly></td>
+                            <td><input type="text" name="figure16" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size16" class="focus" value="12" readonly></td>
+                            <td><input type="text" name="figure17" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size17" class="focus" value="13" readonly></td>
+                            <td><input type="text" name="figure18" placeholder="6%"></td>
+
+                        </tr>
+
+
+                    </table>
+                    <button class="btn btn-primary" style="float: right" type="submit">Save</button>
+                </form>
             </div>
             <div class="tab-pane fade" id="messages">
-                <h4 class="mt-2">Messages tab content</h4>
-                <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec
-                    at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum
-                    laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie
-                    libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+                <form action="{{route('tab3.store')}}" method="POST">
+                    @csrf
+                    <table class="mt-2">
+                        <tr>
+                            <th>Size</th>
+                            <th>Hockey</th>
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size" class="focus" value="8y" readonly></td>
+                            <td><input type="text" name="figure1" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size1" class="focus" value="9y" readonly></td>
+                            <td><input type="text" name="figure2" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size2"  class="focus" value="10y" readonly></td>
+                            <td><input type="text" name="figure3" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size3" class="focus" value="11y" readonly></td>
+                            <td><input type="text" name="figure4" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size4" class="focus" value="12y" readonly></td>
+                            <td><input type="text" name="figure5" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size5" class="focus" value="1" readonly></td>
+                            <td><input type="text" name="figure6" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size6"  class="focus" value="2" readonly></td>
+                            <td><input type="text" name="figure7" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size7" class="focus" value="3" readonly></td>
+                            <td><input type="text" name="figure8" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size8" class="focus" value="4" readonly></td>
+                            <td><input type="text" name="figure9" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size9" class="focus" value="5" readonly></td>
+                            <td><input type="text" name="figure10" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size10" class="focus" value="6" readonly></td>
+                            <td><input type="text" name="figure11" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size11" class="focus" value="7" readonly></td>
+                            <td><input type="text" name="figure12" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size12" class="focus" value="8" readonly></td>
+                            <td><input type="text" name="figure13" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size13" class="focus" value="9" readonly></td>
+                            <td><input type="text" name="figure14" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size14" class="focus" value="10" readonly></td>
+                            <td><input type="text" name="figure15" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size15" class="focus" value="11" readonly></td>
+                            <td><input type="text" name="figure16" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size16" class="focus" value="12" readonly></td>
+                            <td><input type="text" name="figure17" placeholder="6%"></td>
+
+                        </tr>
+                        <tr>
+                            <td ><input type="text" name="size17" class="focus" value="13" readonly></td>
+                            <td><input type="text" name="figure18" placeholder="6%"></td>
+
+                        </tr>
+
+
+                    </table>
+                    <button class="btn btn-primary" style="float: right" type="submit">Save</button>
+                </form>
             </div>
         </div>
     </div>

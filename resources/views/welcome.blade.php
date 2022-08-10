@@ -40,8 +40,6 @@
     
             <tr class="table-light">
               
-                <th scope="col"></th>
-                <th scope="col"></th>
                 <th scope="col">Maximum Sqft</th>
                 <th scope="col">Mininmum Sqft</th>
                 <th scope="col">Action</th>
@@ -58,8 +56,6 @@
 
             @foreach ($data as $setting)
                 <tr class="table-light">
-                    <td></td>
-                    <td></td>
                     <td>{{ $setting->max_sqft }}</td>
                     <td>{{ $setting->min_sqft }}</td>
 

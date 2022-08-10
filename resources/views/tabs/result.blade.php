@@ -3,9 +3,9 @@
 
 <body>
 <div class="m-4">
-    <ul class="nav nav-tabs" id="myTab">
+    <ul class="nav nav-tabs  navbar-light bg-light " id="myTab">
         <li class="nav-item">
-            <a href="#home" class="nav-link active" data-bs-toggle="tab">Tab1</a>
+            <a href="#home" class="nav-link active navbar-brand mb-0 h1" data-bs-toggle="tab">Tab1</a>
         </li>
         <li class="nav-item">
             <a href="#profile" class="nav-link" data-bs-toggle="tab">Tab2</a>
@@ -13,9 +13,7 @@
         <li class="nav-item">
             <a href="#messages" class="nav-link" data-bs-toggle="tab">Tab3</a>
         </li>
-        <li class="nav-item" style="padding-left: 70%;">
-            <a href="tabs" class="btn btn-primary" >Create</a>
-        </li>
+        
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="home">
@@ -46,7 +44,7 @@
                 </tr> 
                 @endforeach
             </table>
-            <button class="btn btn-primary" style="" type="submit">Save</button>
+            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
         </form>
              </div>
              
@@ -58,7 +56,6 @@
             <table class="mt-2">
                 <tr>
                     <th>Size</th>
-                    <th>Figure</th>
                     <th>Priority</th>
                     <th>Multiples</th>
                 </tr>
@@ -67,13 +64,12 @@
                 <tr>
                   
                     <td ><input type="text" name="size" class="focus" value="{{$tab['size']}}" readonly></td>
-                    <td><input type="text" name="figure[{{$tab['size']}}]" value="{{$tab['figure']}}" ></td>
                     <td><input type="text" name="priority[{{$tab['size']}}]" value="{{$tab['priority']}}" ></td>
                     <td><input type="text" name="multiple[{{$tab['size']}}]" value="{{$tab['multiple']}}" ></td>
                 </tr> 
                 @endforeach
             </table>  
-            <button class="btn btn-primary" style="" type="submit">Save</button>
+            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
          </form>      
         </div>
         
@@ -98,9 +94,9 @@
                 </tr> 
                 @endforeach
             </table>
-            <button class="btn btn-primary" style="" type="submit">Save</button>
+            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
          </form> 
                   </div>
     </div>
 </div>
-</body>
+</body> 

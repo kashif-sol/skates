@@ -42,6 +42,7 @@
         <style>
         td{
             padding: 5px;
+            text-align: center;
         }
         th{
             text-align: center;
@@ -66,7 +67,7 @@
 
 <body >
     <header>
-    <div class="buttons text-right" style="padding-top: 27px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
+    <div class="buttons text-left" style="padding-top: 27px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
     <a href="{{ route('main') }}" class="btn btn-primary">SQFT</a>
          <a href="skaters" class="btn btn-primary"
         >Skaters</a>

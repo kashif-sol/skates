@@ -315,21 +315,7 @@ return redirect('tabs');
             $multiple = $request->multiple;
          
           
-        foreach($figure_1 as $key => $row)
-        {
-             
-            
-            if($row != null)
-            {
-               
-                Tab2::where('size', $key)->update([
-                    'figure' => $row
-                    ]);
-            }
-            
-             
-           
-        }
+       
         foreach($multiple as $key2 => $row2)
             {
                

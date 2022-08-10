@@ -44,7 +44,9 @@
                 </tr> 
                 @endforeach
             </table>
-            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
+            <div class="md" style="margin-left: 550px;">
+            <button class="btn btn-primary"  type="submit">Save</button>
+        </div>
         </form>
              </div>
              
@@ -69,8 +71,10 @@
                 </tr> 
                 @endforeach
             </table>  
-            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
-         </form>      
+            <div class="md" style="margin-left: 550px;">
+                <button class="btn btn-primary"  type="submit">Save</button>
+            </div>
+                 </form>      
         </div>
         
         <div class="tab-pane fade" id="messages">
@@ -94,8 +98,10 @@
                 </tr> 
                 @endforeach
             </table>
-            <button class="btn btn-primary" style="float: right" type="submit">Save</button>
-         </form> 
+            <div class="md" style="margin-left: 550px;">
+                <button class="btn btn-primary"  type="submit">Save</button>
+            </div> 
+                </form> 
                   </div>
     </div>
 </div>

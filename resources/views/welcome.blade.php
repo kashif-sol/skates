@@ -7,19 +7,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel" style="padding-left: 25px;">SQFTEET</h5>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('store-sqft') }}" method="POST">
 
-                        <div class="inputs" style=" padding-left: 25%;">
+                        <div class="inputs"  style=" padding-left: 5%;>
                             @csrf
                             <input type="hidden" name="id" id="id">
-                            <input type="text" name="max_sqft" placeholder="Maximum Sqft" style="width: 260px"><br>
-                            <br><br>
-                            <input type="text" name="min_sqft" placeholder="Minimum Sqft" style="width: 260px"><br>
+                            <input type="text" name="max_sqft" placeholder="Maximum Sqft" style="width: 338px;"><br><br>
+                          
+                            <input type="text" name="min_sqft" placeholder="Minimum Sqft" style="width: 338px;"><br><br>
 
                         </div>
                         <div class="modal-footer">
@@ -32,7 +32,7 @@
         </div>
     </div>
     
-    <h3>Sqfts Available</h3>
+    <h3 style="text-align: center;">Sqfts Available</h3>
     <table class="table">
        
         <thead>

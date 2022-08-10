@@ -26,9 +26,10 @@
                    <input type="hidden" value="tab1" name="tab_type" >
             <table class="mt-2">
                 <tr>
+                    <th></th>
                     <th>Size</th>
-                    <th>Figure</th>
-                    <th> Hockey</th>
+                    <th>Priority</th>
+                    <th>Multiples</th>
                 </tr>
           
                 @foreach($tab as $key=> $tab)
@@ -37,8 +38,8 @@
                   <td>  <input type="hidden" name="id" value="{{$tab['id']}}"></td>
                   
                     <td ><input type="text"  name="size" class="focus" value="{{$tab['size']}}" readonly></td>
-                    <td><input type="text" name="figure1[{{$tab['size']}}]" value="{{$tab['figure1']}}" ></td>
-                    <td><input type="text" name="figure2[{{$tab['size']}}]" value="{{$tab['figure2']}}" ></td>
+                    <td><input type="text" name="priority[{{$tab['size']}}]" value="{{$tab['priority']}}" ></td>
+                    <td><input type="text" name="multiple[{{$tab['size']}}]" value="{{$tab['multiple']}}" ></td>
                 
                    
                    
@@ -58,6 +59,8 @@
                 <tr>
                     <th>Size</th>
                     <th>Figure</th>
+                    <th>Priority</th>
+                    <th>Multiples</th>
                 </tr>
           
                 @foreach($tab_2 as $tab)
@@ -65,6 +68,8 @@
                   
                     <td ><input type="text" name="size" class="focus" value="{{$tab['size']}}" readonly></td>
                     <td><input type="text" name="figure[{{$tab['size']}}]" value="{{$tab['figure']}}" ></td>
+                    <td><input type="text" name="priority[{{$tab['size']}}]" value="{{$tab['priority']}}" ></td>
+                    <td><input type="text" name="multiple[{{$tab['size']}}]" value="{{$tab['multiple']}}" ></td>
                 </tr> 
                 @endforeach
             </table>  
@@ -80,14 +85,16 @@
             <table class="mt-2">
                 <tr>
                     <th>Size</th>
-                    <th>Hockey</th>
+                    <th>Priority</th>
+                    <th>Multiple</th>
                 </tr>
           
                 @foreach($tab_3 as $tab)
                 <tr>
                   
                     <td ><input type="text" name="size" class="focus" value="{{$tab['size']}}" readonly></td>
-                    <td><input type="text" name="hockey[{{$tab['size']}}]" value="{{$tab['hockey']}}" ></td>
+                    <td><input type="text" name="priority[{{$tab['size']}}]" value="{{$tab['priority']}}" ></td>
+                    <td><input type="text" name="multiple[{{$tab['size']}}]" value="{{$tab['multiple']}}" ></td>
                 </tr> 
                 @endforeach
             </table>

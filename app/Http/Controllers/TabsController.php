@@ -274,10 +274,10 @@ return redirect('tabs');
 
         if($tab_type == "tab1")
         {
-            $figure_1 = $request->figure1;
-            $figure_2 = $request->figure2;
+            $priority = $request->priority;
+            $multiple = $request->multiple;
               
-            foreach($figure_1 as $key => $row)
+            foreach($priority as $key => $row)
             {
                  
                 
@@ -285,7 +285,7 @@ return redirect('tabs');
                 {
                    
                     Tab1::where('size', $key)->update([
-                        'figure1' => $row
+                        'priority' => $row
                         ]);
                 }
                 
@@ -294,20 +294,25 @@ return redirect('tabs');
             }
           
              
-            foreach($figure_2 as $key2 => $row2)
+            foreach($multiple as $key2 => $row2)
             {
-                if($row != null)
+               
+                if($row2 != null)
                 {
                    
                     Tab1::where('size', $key2)->update([
-                        'figure2' => $row2
+                        'multiple' => $row2
+                     
                         ]);
+                      
                 }
                 
             }
         }
         else if($tab_type == "tab2"){
             $figure_1 = $request->figure;
+            $priority = $request->priority;
+            $multiple = $request->multiple;
          
           
         foreach($figure_1 as $key => $row)
@@ -325,15 +330,44 @@ return redirect('tabs');
              
            
         }
+        foreach($multiple as $key2 => $row2)
+            {
+               
+                if($row2 != null)
+                {
+                   
+                    Tab2::where('size', $key2)->update([
+                        'multiple' => $row2
+                     
+                        ]);
+                      
+                }
+                
+            }
+            foreach($priority as $key3 => $row3)
+            {
+               
+                if($row3 != null)
+                {
+                   
+                    Tab2::where('size', $key3)->update([
+                        'priority' => $row3
+                     
+                        ]);
+                      
+                }
+                
+            }
       
          
          
         }
         else if($tab_type == "tab3"){
-            $figure_1 = $request->hockey;
+            $priority = $request->priority;
+            $multiple = $request->multiple;
          
           
-        foreach($figure_1 as $key => $row)
+        foreach($priority as $key => $row)
         {
              
             
@@ -341,7 +375,22 @@ return redirect('tabs');
             {
                
                 Tab3::where('size', $key)->update([
-                    'hockey' => $row
+                    'priority' => $row
+                    ]);
+            }
+            
+             
+           
+        }
+        foreach($multiple as $key5 => $row5)
+        {
+             
+            
+            if($row5 != null)
+            {
+              
+                Tab3::where('size', $key5)->update([
+                    'multiple' => $row5
                     ]);
             }
             

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tab2 extends Model
 {
     use HasFactory;
-    protected $fillable = ['size','figure'];
+    protected $fillable = ['size','figure','priority','multiple'];
     public $table = "tab_2";
 
 }

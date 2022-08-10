@@ -16,7 +16,9 @@ class CreateTab2Table extends Migration
         Schema::create('tab_2', function (Blueprint $table) {
             $table->id();
             $table->string('size');
-            $table->string('figure');
+            $table->string('figure')->nullable();
+            $table->string('priority')->nullable();
+            $table->string('multiple')->nullable();
             $table->timestamps();
         });
     }

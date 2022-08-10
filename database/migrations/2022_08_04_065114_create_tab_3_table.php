@@ -16,7 +16,8 @@ class CreateTab3Table extends Migration
         Schema::create('tab_3', function (Blueprint $table) {
             $table->id();
             $table->string('size');
-            $table->string('hockey');
+            $table->string('priority')->nullable();
+            $table->string('multiple')->nullable();
             $table->timestamps();
         });
     }

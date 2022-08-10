@@ -16,8 +16,8 @@ class CreateTab1Table extends Migration
         Schema::create('tab_1', function (Blueprint $table) {
             $table->id();
             $table->string('size');
-            $table->string('70%figure');
-            $table->string('30%figure');
+            $table->string('priority')->nullable();
+            $table->string('multiple')->nullable();
             $table->timestamps();
         });
     }

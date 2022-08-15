@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\Input;
 
 class TabsController extends Controller
 {
+
     //
     public function index(){
   
@@ -20,7 +21,9 @@ echo $result['priority']*'4';
     }
 
         return view('tabs.index');
+        
     }
+
     public function result(){
         $tab1=Tab1::all();
         $tab2=Tab2::all();

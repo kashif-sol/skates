@@ -13,6 +13,12 @@ class TabsController extends Controller
 {
     //
     public function index(){
+  
+    $result=Tab1::all();
+    foreach($result as $result){
+echo $result['priority']*'4';
+    }
+
         return view('tabs.index');
     }
     public function result(){
@@ -316,6 +322,7 @@ return redirect('tabs');
          
           
        
+            
         foreach($multiple as $key2 => $row2)
             {
                
@@ -589,6 +596,7 @@ return redirect('tabs');
         }
         public function storet3(Request $request){
             // 
+            
                 $size=$request->size;
              $figure1=$request->figure1;
              $size1=$request->size1;

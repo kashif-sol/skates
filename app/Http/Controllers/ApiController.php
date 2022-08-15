@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sqft;
+use App\Models\Tab1;
+use App\Models\Tab2;
+use App\Models\Tab3;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
@@ -14,41 +18,166 @@ class ApiController extends Controller
     }
     public function sqftcal(Request $request){
    
-   $length=$request->length;
-   $width=$request->width;
-   $ice_sheets =  $request->ice_sheets;
-   $tot_sqfeet = $length * $width;
-   $max=Sqft::pluck('max_sqft');
-   $from=$max;
-   $min=Sqft::pluck('min_sqft');
-    $to=$min;
+        $length=$request->length;
+        $width=$request->width;
+        $total_sqfeet=$length * $width;
+        $ice_sheets=$request->ice_sheets;
+        $sqfeets  = Sqft::with('skatersSqft:id,ofskaterssqfts,ofrentalskatersneeded,sqfts_id')->where('max_sqft','>=',$total_sqfeet )->where('min_sqft','<=',$total_sqfeet )->first();
 
-  
-//   return response()->json(['data'=>$data]);
-$sqfeets  = Sqft::with('skatersSqft:id,ofskaterssqfts,ofrentalskatersneeded,sqfts_id')->where('max_sqft','>=',$tot_sqfeet )->where('min_sqft','<=',$tot_sqfeet )->first();
-$sqfeets = $sqfeets->toArray();
-$skates_per_sqft = $sqfeets["skaters_sqft"][0]["ofskaterssqfts"];
-$rental_skates_needed = $sqfeets["skaters_sqft"][0]["ofrentalskatersneeded"];
-$skates_per_session = ($tot_sqfeet * $skates_per_sqft ) / 100;
-$no_rental_skates_needed  = $skates_per_session * $rental_skates_needed;
-$tot_no_rental_skates_needed  = $no_rental_skates_needed * $ice_sheets;
-$mobile_skates = $tot_no_rental_skates_needed * 85;
+        $sqfeets = $sqfeets->toArray();
+        $skates_per_sqft = $sqfeets["skaters_sqft"][0]["ofskaterssqfts"];
+        $rental_skates_needed = $sqfeets["skaters_sqft"][0]["ofrentalskatersneeded"];
+        $skates_per_session = ($total_sqfeet * $skates_per_sqft ) / 100;
+        $no_rental_skates  = $skates_per_session * $rental_skates_needed;
+        $email=$request->email;
+            $value= $no_rental_skates * $ice_sheets;
+            $figure_7= 70;
+            $percentagefigure=($figure_7 / 100)*$value;
+            $percentagefigures=number_format($percentagefigure);
+            $toalpercentagefigure=intval($percentagefigures);
+            $figure_3= 30;
+            $percentagefigure3=($figure_3 / 100)*$value;
+            $percentagefigures3=number_format($percentagefigure3);
+            $toalpercentagefigure3=intval($percentagefigures3);
+            $sum = Tab1::sum('multiple');
+             $sums=number_format($sum);
+         $totalmultiple=intval($sums);
+       
+        $remainder_7 = $toalpercentagefigure % $totalmultiple;
+        $quotient_7 = ($toalpercentagefigure - $remainder_7) / $totalmultiple;
+     
+            $remainder_3 = $toalpercentagefigure3 % $totalmultiple;
+            $quotient_3 = ($toalpercentagefigure3 - $remainder_3) / $totalmultiple;
+          
+            $sumedpriorirty = Tab1::sum('priority');
+            $figure_value= $sumedpriorirty*$quotient_7;
+            $figure_value=number_format($figure_value);
+            $hockey_value=$sumedpriorirty*$quotient_3;
+            $hockey_value=number_format($hockey_value);
+       $vendor = DB::Table('tab_1')->get();
+       $arr=[];
+       $fig=[];
+       $hock=[];
 
-if($no_rental_skates_needed<200){
-    $total_sparx =1;
-}
-else{
-    $total_sparx=2;
-}
+     foreach($vendor as $data){
+        $size= $data->size;
+       $figure= $data->priority * $quotient_7;
+       $hockey= $data->priority * $quotient_3;
+       
+array_push($arr,$size,$figure ,$hockey );
+       
 
+     }
+     $chunckedArray=array_chunk($arr,3);
+// 
+
+$sumt2 = Tab2::sum('multiple');
+$sumedt2=number_format($sumt2);
+        $totalmultiplet2=intval($sumedt2);
+  $remainder_7t2 = $toalpercentagefigure % $totalmultiplet2;
+       $quotient_7t2 = ($toalpercentagefigure - $remainder_7t2) / $totalmultiplet2;
+     
+    $remainder_3t2 = $toalpercentagefigure3 % $totalmultiplet2;
+ 
+           $quotient_3t2 = ($toalpercentagefigure3 - $remainder_3t2) / $totalmultiplet2;
+ $sumedpriorirtyt2 = Tab2::sum('priority');
+  $vendort2 = DB::Table('tab_2')->get();
+      $arrt2=[];
+      $testf=2;
+ foreach($vendort2 as $datat2){
+       $sizet2= $datat2->size;
+      $resultf=$datat2->priority;
+      $figuret2=intval($resultf);
+    //   
+      $figuret2= $figuret2*$quotient_7t2;
+    $resulth=$datat2->priority;
+    $hockeyt2=intval($resulth);
+    
+      $hockeyt2= $hockeyt2*$quotient_3t2;
+      
+array_push($arrt2,$sizet2,$figuret2 ,$hockeyt2 );
+    }
+$chunckedArrayt2=array_chunk($arrt2,3);
+$sumt3 = Tab3::sum('multiple');
+$sumedt3=number_format($sumt3);
+        $totalmultiplet3=intval($sumedt3);
+  $remainder_7t3 = $toalpercentagefigure % $totalmultiplet3;
+       $quotient_7t3 = ($toalpercentagefigure - $remainder_7t3) / $totalmultiplet3;
+     
+    $remainder_3t3 = $toalpercentagefigure3 % $totalmultiplet3;
+           $quotient_3t3 = ($toalpercentagefigure3 - $remainder_3t3) / $totalmultiplet3;
+ $sumedpriorirtyt2 = Tab2::sum('priority');
+       
+  $vendort3 = DB::Table('tab_3')->get();
+      $arrt3=[];
+ foreach($vendort3 as $datat3){
+       $sizet3= $datat3->size;
+      $result3=$datat3->priority;
+      $figuret3=intval($result3);
+      $figuret3= $figuret3*$quotient_7t3;
+    $resulth3=$datat3->priority;
+    $hockeyt3=intval($resulth3);
+      $hockeyt3= $hockeyt3*$quotient_3t3;
+      
+array_push($arrt3,$sizet3,$figuret3 ,$hockeyt3 );
+
+    }
+$chunckedArrayt3=array_chunk($arrt3,3);
+
+        
+    
+
+
+      
+        
+        // $store = new Result([
+        //     'ice_sheets'=>$ice_sheets,
+        //     'total_sqfeet'=> $total_sqfeet,
+        //     'no_skates'=>$skates_per_session,
+        //     'no_rental_skates'=>$no_rental_skates,
+        //     'email'=>$email,
+        // ]);
+        // $store->save();
+        
+        if($no_rental_skates<200){
+            $total_sparx =1;
+        }
+        else{
+            $total_sparx=2;
+        }
 $ret_array = array(
     'skates_per_session'=>$skates_per_session,
-    'no_rental_skates_needed'=>$no_rental_skates_needed,
-    'tot_no_rental_skates_needed'=>$tot_no_rental_skates_needed,
-    'mobile_skates'=>$mobile_skates,
-    'tot_sqfeet'=>$tot_sqfeet,
+    'no_rental_skates_needed'=>$no_rental_skates,
+    // 'tot_no_rental_skates_needed'=>$tot_no_rental_skates_needed,
+    // 'mobile_skates'=>$mobile_skates,
+    'tot_sqfeet'=>$total_sqfeet,
     'total_sparx'=>$total_sparx,
     'ice_sheets'=>$ice_sheets,
+    // new line 
+
+
+
+    'ice_seet'=>$ice_sheets,
+    'total_sqfeet'=>$total_sqfeet,
+    'no_skates'=>$skates_per_session,
+    'no_rental_skates'=>$no_rental_skates,
+    // 'email'=>$email,
+    // 'total_sparx'=>$total_sparx,
+    // '70%figure'=>$percentagefigures,
+    // '30%figure'=>$percentagefigures3,
+    // 'figure_value'=>$figure_value,
+    // 'hockey_value'=>$hockey_value,
+    // 'quotient_7'=>$quotient_7,
+    // 'quotient_3'=>$quotient_3,
+    'Tab1'=>$chunckedArray,
+    'Tab2'=>$chunckedArrayt2,
+    'Tab3'=>$chunckedArrayt3,
+//    'size'=>$sizee,
+//    'figure'=>$figure,
+//    'size'=>$arr,
+//    'figure'=>$fig,
+//    'hockey'=>$hock,
+// 'Tab1'=>$vendor,
 
     
 );

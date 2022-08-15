@@ -19,6 +19,7 @@ class ResultController extends Controller
         $total_sqfeet=$length * $width;
         $ice_sheets=$request->ice_sheets;
         $sqfeets  = Sqft::with('skatersSqft:id,ofskaterssqfts,ofrentalskatersneeded,sqfts_id')->where('max_sqft','>=',$total_sqfeet )->where('min_sqft','<=',$total_sqfeet )->first();
+
         $sqfeets = $sqfeets->toArray();
         $skates_per_sqft = $sqfeets["skaters_sqft"][0]["ofskaterssqfts"];
         $rental_skates_needed = $sqfeets["skaters_sqft"][0]["ofrentalskatersneeded"];

@@ -40,8 +40,9 @@
     
             <tr class="table-light">
               
-                <th scope="col">Maximum Sqft</th>
+             
                 <th scope="col">Mininmum Sqft</th>
+                <th scope="col">Maximum Sqft</th>
                 <th scope="col">Action</th>
                 <th scope="col" style="text-align: right"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Create Sqft </button>
 </th>
@@ -56,8 +57,9 @@
 
             @foreach ($data as $setting)
                 <tr class="table-light">
-                    <td>{{ $setting->max_sqft }}</td>
+                    
                     <td>{{ $setting->min_sqft }}</td>
+                    <td>{{ $setting->max_sqft }}</td>
 
                     <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
                     <td> <a class="btn btn-primary" href="" id="editCompany" data-toggle="modal"

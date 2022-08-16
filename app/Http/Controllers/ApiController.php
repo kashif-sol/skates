@@ -27,14 +27,17 @@ class ApiController extends Controller
         $sqfeets = $sqfeets->toArray();
         $skates_per_sqft = $sqfeets["skaters_sqft"][0]["ofskaterssqfts"];
         $rental_skates_needed = $sqfeets["skaters_sqft"][0]["ofrentalskatersneeded"];
+     
         $skates_per_session = ($total_sqfeet * $skates_per_sqft ) / 100;
         $no_rental_skates  = $skates_per_session * $rental_skates_needed;
+        // dd($no_rental_skates);
         $email=$request->email;
             $value= $no_rental_skates * $ice_sheets;
             $figure_7= 70;
             $percentagefigure=($figure_7 / 100)*$value;
             $percentagefigures=number_format($percentagefigure);
             $toalpercentagefigure=intval($percentagefigures);
+            // dd($toalpercentagefigure);
             $figure_3= 30;
             $percentagefigure3=($figure_3 / 100)*$value;
             $percentagefigures3=number_format($percentagefigure3);
@@ -42,11 +45,11 @@ class ApiController extends Controller
             $sum = Tab1::sum('multiple');
              $sums=number_format($sum);
          $totalmultiple=intval($sums);
-       
+        //  dd($totalmultiple);
         $remainder_7 = $toalpercentagefigure % $totalmultiple;
         $quotient_7 = ($toalpercentagefigure - $remainder_7) / $totalmultiple;
-     
-            $remainder_3 = $toalpercentagefigure3 % $totalmultiple;
+        // dd($quotient_7);
+        $remainder_3 = $toalpercentagefigure3 % $totalmultiple;
             $quotient_3 = ($toalpercentagefigure3 - $remainder_3) / $totalmultiple;
           
             $sumedpriorirty = Tab1::sum('priority');
@@ -62,6 +65,7 @@ class ApiController extends Controller
      foreach($vendor as $data){
         $size= $data->size;
        $figure= $data->priority * $quotient_7;
+    // 
        $hockey= $data->priority * $quotient_3;
        
 array_push($arr,$size,$figure ,$hockey );
@@ -148,38 +152,15 @@ $chunckedArrayt3=array_chunk($arrt3,3);
 $ret_array = array(
     'skates_per_session'=>$skates_per_session,
     'no_rental_skates_needed'=>$no_rental_skates,
-    // 'tot_no_rental_skates_needed'=>$tot_no_rental_skates_needed,
-    // 'mobile_skates'=>$mobile_skates,
-    'tot_sqfeet'=>$total_sqfeet,
     'total_sparx'=>$total_sparx,
     'ice_sheets'=>$ice_sheets,
     // new line 
-
-
-
-    'ice_seet'=>$ice_sheets,
     'total_sqfeet'=>$total_sqfeet,
     'no_skates'=>$skates_per_session,
     'no_rental_skates'=>$no_rental_skates,
-    // 'email'=>$email,
-    // 'total_sparx'=>$total_sparx,
-    // '70%figure'=>$percentagefigures,
-    // '30%figure'=>$percentagefigures3,
-    // 'figure_value'=>$figure_value,
-    // 'hockey_value'=>$hockey_value,
-    // 'quotient_7'=>$quotient_7,
-    // 'quotient_3'=>$quotient_3,
     'Tab1'=>$chunckedArray,
     'Tab2'=>$chunckedArrayt2,
-    'Tab3'=>$chunckedArrayt3,
-//    'size'=>$sizee,
-//    'figure'=>$figure,
-//    'size'=>$arr,
-//    'figure'=>$fig,
-//    'hockey'=>$hock,
-// 'Tab1'=>$vendor,
-
-    
+    'Tab3'=>$chunckedArrayt3,    
 );
 return response()->json(['ret_array'=>$ret_array
 ]);

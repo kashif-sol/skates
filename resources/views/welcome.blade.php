@@ -17,9 +17,11 @@
                         <div class="inputs"  style=" padding-left: 5%;>
                             @csrf
                             <input type="hidden" name="id" id="id">
+                           <input type="text" name="min_sqft" placeholder="Minimum Sqft" style="width: 338px;"><br><br>
+
+
                             <input type="text" name="max_sqft" placeholder="Maximum Sqft" style="width: 338px;"><br><br>
                           
-                            <input type="text" name="min_sqft" placeholder="Minimum Sqft" style="width: 338px;"><br><br>
 
                         </div>
                         <div class="modal-footer">
@@ -88,11 +90,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <div class="inputs"style=" padding-left: 5%; >
+                    
                     <input type="hidden" id="color_id" name="color_id" value="">
                     <div class="modal-body">
-                        <input type="text" name="sqft" id="sqft" value="" style="width: 338px;"><br><br>
+                        <div class="inputs" style=" padding-left: 5%;">
                         <input type="text" name="min_sqft" id="min_sqft"  value=""  style="width: 338px;"><br><br>
+
+                        <input type="text" name="sqft" id="sqft" value="" style="width: 338px;"><br><br>
                     </div>
                 </div>
 

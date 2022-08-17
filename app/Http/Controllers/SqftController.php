@@ -8,6 +8,7 @@ use App\Models\Quotes;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ApiController;
 
 class SqftController extends Controller
 {
@@ -23,6 +24,16 @@ class SqftController extends Controller
     {
         $quotes = Quotes::all();
         return view('quotes', compact('quotes'));
+    }
+
+    public function quotes_detail($quoteId)
+    {
+        $quote_detail = Quotes::find($quoteId);
+        $ApiController = new ApiController();
+        $request = new \Illuminate\Http\Request();
+        $request->replace(['length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
+        $data = $ApiController->sqftcal($request);
+        return view('quote-detail', compact('quote_detail' , 'data'));
     }
 
     public function store(Request $request)

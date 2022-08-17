@@ -8,23 +8,21 @@
                 <th scope="col">ice sheets</th>
                 <th scope="col">length</th>
                 <th scope="col">width</th>
-                <th scope="col"></th>
+               
                 </th>
             </tr>
         </thead>
         <tbody>
-        @if(isset($quotes))
-            @foreach ($quotes as  $quote)
+        @if(isset($quote_detail))
+           
                 <tr class="table-light">
-                    <td>{{$quote->email}}</td>
-                    <td>{{$quote->ice_sheet}}</td>
-                    <td>{{$quote->length}}</td>
-                    <td>{{$quote->width}}</td>
-                    <td>
-                        <a href="/quotes-detail/{{$quote->id}}"  class="btn btn-primary">Detail</a>
-                    </td>
+                    <td>{{$quote_detail->email}}</td>
+                    <td>{{$quote_detail->ice_sheet}}</td>
+                    <td>{{$quote_detail->length}}</td>
+                    <td>{{$quote_detail->width}}</td>
+               
                 </tr>
-            @endforeach
+            
             @endif
 
         </tbody>

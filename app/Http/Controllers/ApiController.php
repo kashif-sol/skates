@@ -169,6 +169,9 @@ $ret_array = array(
     'Tab2'=>$chunckedArrayt2,
     'Tab3'=>$chunckedArrayt3,    
 );
+
+if(isset($request->cont) && $request->cont == 1)
+    return $ret_array;
 return response()->json(['ret_array'=>$ret_array
 ]);
     }

@@ -31,7 +31,7 @@ class SqftController extends Controller
         $quote_detail = Quotes::find($quoteId);
         $ApiController = new ApiController();
         $request = new \Illuminate\Http\Request();
-        $request->replace(['length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
+        $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
         return view('quote-detail', compact('quote_detail' , 'data'));
     }

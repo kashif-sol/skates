@@ -31,8 +31,9 @@ class ApiController extends Controller
         $skates_per_session = ($total_sqfeet * $skates_per_sqft ) / 100;
         $no_rental_skates  = $skates_per_session * $rental_skates_needed;
         // dd($no_rental_skates);
-        $email=$request->email;
+             $email=$request->email;
             $value= $no_rental_skates * $ice_sheets;
+            $total_rental_skates =  $value;
             $figure_7= 70;
             $percentagefigure=($figure_7 / 100)*$value;
             $percentagefigures=number_format($percentagefigure);
@@ -78,12 +79,12 @@ array_push($arr,$size,$figure ,$hockey );
 $sumt2 = Tab2::sum('multiple');
 $sumedt2=number_format($sumt2);
         $totalmultiplet2=intval($sumedt2);
-  $remainder_7t2 = $toalpercentagefigure % $totalmultiplet2;
-       $quotient_7t2 = ($toalpercentagefigure - $remainder_7t2) / $totalmultiplet2;
+  $remainder_7t2 = $total_rental_skates % $totalmultiplet2;
+       $quotient_7t2 = ($total_rental_skates - $remainder_7t2) / $totalmultiplet2;
      
-    $remainder_3t2 = $toalpercentagefigure3 % $totalmultiplet2;
+    $remainder_3t2 = $total_rental_skates % $totalmultiplet2;
  
-           $quotient_3t2 = ($toalpercentagefigure3 - $remainder_3t2) / $totalmultiplet2;
+           $quotient_3t2 = ($total_rental_skates - $remainder_3t2) / $totalmultiplet2;
  $sumedpriorirtyt2 = Tab2::sum('priority');
   $vendort2 = DB::Table('tab_2')->get();
       $arrt2=[];
@@ -99,17 +100,17 @@ $sumedt2=number_format($sumt2);
     
       $hockeyt2= $hockeyt2*$quotient_3t2;
       
-array_push($arrt2,$sizet2,$figuret2 ,$hockeyt2 );
+array_push($arrt2,$sizet2,$figuret2  );
     }
 $chunckedArrayt2=array_chunk($arrt2,3);
 $sumt3 = Tab3::sum('multiple');
 $sumedt3=number_format($sumt3);
         $totalmultiplet3=intval($sumedt3);
-  $remainder_7t3 = $toalpercentagefigure % $totalmultiplet3;
-       $quotient_7t3 = ($toalpercentagefigure - $remainder_7t3) / $totalmultiplet3;
+  $remainder_7t3 = $total_rental_skates % $totalmultiplet3;
+       $quotient_7t3 = ($total_rental_skates - $remainder_7t3) / $totalmultiplet3;
      
-    $remainder_3t3 = $toalpercentagefigure3 % $totalmultiplet3;
-           $quotient_3t3 = ($toalpercentagefigure3 - $remainder_3t3) / $totalmultiplet3;
+    $remainder_3t3 = $total_rental_skates % $totalmultiplet3;
+           $quotient_3t3 = ($total_rental_skates - $remainder_3t3) / $totalmultiplet3;
  $sumedpriorirtyt2 = Tab2::sum('priority');
        
   $vendort3 = DB::Table('tab_3')->get();
@@ -123,26 +124,12 @@ $sumedt3=number_format($sumt3);
     $hockeyt3=intval($resulth3);
       $hockeyt3= $hockeyt3*$quotient_3t3;
       
-array_push($arrt3,$sizet3,$figuret3 ,$hockeyt3 );
+array_push($arrt3,$sizet3,$figuret3  );
 
     }
 $chunckedArrayt3=array_chunk($arrt3,3);
 
-        
-    
 
-
-      
-        
-        // $store = new Result([
-        //     'ice_sheets'=>$ice_sheets,
-        //     'total_sqfeet'=> $total_sqfeet,
-        //     'no_skates'=>$skates_per_session,
-        //     'no_rental_skates'=>$no_rental_skates,
-        //     'email'=>$email,
-        // ]);
-        // $store->save();
-        
         if($no_rental_skates<200){
             $total_sparx =1;
         }

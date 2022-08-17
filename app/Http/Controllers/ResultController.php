@@ -149,21 +149,10 @@ $chunckedArrayt3=array_chunk($arrt3,3);
             'no_rental_skates'=>$no_rental_skates,
             'email'=>$email,
             'total_sparx'=>$total_sparx,
-            // '70%figure'=>$percentagefigures,
-            // '30%figure'=>$percentagefigures3,
-            // 'figure_value'=>$figure_value,
-            // 'hockey_value'=>$hockey_value,
-            // 'quotient_7'=>$quotient_7,
-            // 'quotient_3'=>$quotient_3,
             'Tab1'=>$chunckedArray,
             'Tab2'=>$chunckedArrayt2,
             'Tab3'=>$chunckedArrayt3,
-        //    'size'=>$sizee,
-        //    'figure'=>$figure,
-        //    'size'=>$arr,
-        //    'figure'=>$fig,
-        //    'hockey'=>$hock,
-        // 'Tab1'=>$vendor,
+
 
         );
     

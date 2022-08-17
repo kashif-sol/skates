@@ -69,7 +69,7 @@ class ApiController extends Controller
     // 
        $hockey= $data->priority * $quotient_3;
        
-array_push($arr,$size,$figure ,$hockey );
+array_push($arr,$size,$figure  , $hockey);
        
 
      }
@@ -102,7 +102,7 @@ $sumedt2=number_format($sumt2);
       
 array_push($arrt2,$sizet2,$figuret2  );
     }
-$chunckedArrayt2=array_chunk($arrt2,3);
+$chunckedArrayt2=array_chunk($arrt2,2);
 $sumt3 = Tab3::sum('multiple');
 $sumedt3=number_format($sumt3);
         $totalmultiplet3=intval($sumedt3);
@@ -127,7 +127,7 @@ $sumedt3=number_format($sumt3);
 array_push($arrt3,$sizet3,$figuret3  );
 
     }
-$chunckedArrayt3=array_chunk($arrt3,3);
+$chunckedArrayt3=array_chunk($arrt3,2);
 
 
         if($no_rental_skates<200){

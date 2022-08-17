@@ -27,6 +27,7 @@ class ResultController extends Controller
         $no_rental_skates  = $skates_per_session * $rental_skates_needed;
         $email=$request->email;
             $value= $no_rental_skates * $ice_sheets;
+            $total_rental_skates =  $value;
             $figure_7= 70;
             $percentagefigure=($figure_7 / 100)*$value;
             $percentagefigures=number_format($percentagefigure);
@@ -67,16 +68,15 @@ array_push($arr,$size,$figure ,$hockey );
      $chunckedArray=array_chunk($arr,3);
 // 
 
-$sumt2 = Tab2::sum('multiple');
-$sumedt2=number_format($sumt2);
-        $totalmultiplet2=intval($sumedt2);
-  $remainder_7t2 = $toalpercentagefigure % $totalmultiplet2;
-       $quotient_7t2 = ($toalpercentagefigure - $remainder_7t2) / $totalmultiplet2;
-     
-    $remainder_3t2 = $toalpercentagefigure3 % $totalmultiplet2;
+    $sumt2 = Tab2::sum('multiple');
+    $sumedt2=number_format($sumt2);
+    $totalmultiplet2=intval($sumedt2);
+    $remainder_7t2 = $total_rental_skates  % $totalmultiplet2;
+    $quotient_7t2 = ($total_rental_skates - $remainder_7t2) / $totalmultiplet2; 
+    $remainder_3t2 = $total_rental_skates % $totalmultiplet2;
+    $quotient_3t2 = ($total_rental_skates - $remainder_3t2) / $totalmultiplet2;
+
  
-           $quotient_3t2 = ($toalpercentagefigure3 - $remainder_3t2) / $totalmultiplet2;
- $sumedpriorirtyt2 = Tab2::sum('priority');
   $vendort2 = DB::Table('tab_2')->get();
       $arrt2=[];
       $testf=2;
@@ -97,7 +97,7 @@ $chunckedArrayt2=array_chunk($arrt2,3);
 $sumt3 = Tab3::sum('multiple');
 $sumedt3=number_format($sumt3);
         $totalmultiplet3=intval($sumedt3);
-  $remainder_7t3 = $toalpercentagefigure % $totalmultiplet3;
+  $remainder_7t3 = $total_rental_skates % $totalmultiplet3;
        $quotient_7t3 = ($toalpercentagefigure - $remainder_7t3) / $totalmultiplet3;
      
     $remainder_3t3 = $toalpercentagefigure3 % $totalmultiplet3;

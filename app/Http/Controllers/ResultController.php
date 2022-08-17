@@ -91,7 +91,7 @@ array_push($arr,$size,$figure ,$hockey );
     
       $hockeyt2= $hockeyt2*$quotient_3t2;
       
-array_push($arrt2,$sizet2,$figuret2 ,$hockeyt2 );
+array_push($arrt2,$sizet2,$figuret2  );
     }
 $chunckedArrayt2=array_chunk($arrt2,3);
 $sumt3 = Tab3::sum('multiple');
@@ -115,7 +115,7 @@ $sumedt3=number_format($sumt3);
     $hockeyt3=intval($resulth3);
       $hockeyt3= $hockeyt3*$quotient_3t3;
       
-array_push($arrt3,$sizet3,$figuret3 ,$hockeyt3 );
+array_push($arrt3,$sizet3,$figuret3  );
 
     }
 $chunckedArrayt3=array_chunk($arrt3,3);

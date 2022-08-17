@@ -71,3 +71,4 @@ Route::post('tab3',[TabsController::class,'storet3'])->name('tab3.store');
 Route::get('result',[TabsController::class,'result']);
 Route::post('tabstore',[TabsController::class,'save'])->name('tab.store');
 Route::post('update-tab', [TabsController::class, 'update']);
+Route::get('quotes',[SqftController::class,'quotes']);

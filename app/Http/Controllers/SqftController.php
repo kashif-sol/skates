@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SkatersSqft;
 use App\Models\Sqft;
+use App\Models\Quotes;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,13 @@ class SqftController extends Controller
         // dd($data);
         return view('welcome', compact('data'));
     }
+
+    public function quotes()
+    {
+        $quotes = Quotes::all();
+        return view('quotes', compact('quotes'));
+    }
+
     public function store(Request $request)
     {
         $post = new Sqft();

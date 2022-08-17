@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('get',[ApiController::class,'get']);
 Route::post('values',[ApiController::class,'sqftcal'])->name('sqft.calculate');
+Route::post('quote',[ApiController::class,'quote'])->name('quote');
 Route::post('result',[ResultController::class,'store']);

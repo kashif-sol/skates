@@ -6,6 +6,7 @@ use App\Models\Sqft;
 use App\Models\Tab1;
 use App\Models\Tab2;
 use App\Models\Tab3;
+use App\Models\Quotes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,24 @@ class ApiController extends Controller
     public function get(){
         return view('api');
     }
+
+    public function quote(Request $request)
+    {
+        $quotes = new Quotes();
+        $quotes->ice_sheet = $request->ice_sheets;
+        $quotes->length = $request->length;
+        $quotes->width = $request->width;
+        $quotes->tab = $request->tab;
+        $quotes->user_id = 1;
+        $quotes->email = $request->email;
+        $quotes->save();
+        $ret_array = array(
+            "status" => true,
+            "message" => "Your Quote submitted."
+        );
+        return response()->json(['data'=>$ret_array]);
+    }
+
     public function sqftcal(Request $request){
    
         $length=$request->length;

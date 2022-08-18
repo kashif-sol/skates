@@ -71,7 +71,7 @@
     <a href="{{ route('main') }}" style="margin-left: 10px;" class="btn btn-primary">SQFT</a>
          <a href="skaters" style="margin-left: 16px;" class="btn btn-primary">Skaters</a>
              <a href="result" style="margin-left: 16px;" class="btn btn-primary">Size</a>
-             <a href="quotes" style="margin-left: 16px;display:none;" class="btn btn-primary">Quotes</a>
+             <a href="quotes" style="margin-left: 16px;" class="btn btn-primary">Quotes</a>
          
         
       

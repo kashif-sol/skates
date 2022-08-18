@@ -78,8 +78,13 @@
                     @foreach ($tabs_data as $tabss)
                     <tr>
                         @foreach ($tabss as $tabs)
+                        @if($loop->last)
                         <?php $tab_data = number_format($tabs , 2);?>
-                            <td>{{$tab_data}}</td>
+                        <td>{{$tab_data}}</td>
+                        @else
+                        <td>{{$tabs}}</td>
+                        @endif
+                           
                         @endforeach
                     </tr>
                     @endforeach

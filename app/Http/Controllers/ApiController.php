@@ -49,30 +49,33 @@ class ApiController extends Controller
         $rental_skates_needed = $sqfeets["skaters_sqft"][0]["ofrentalskatersneeded"];
      
         $skates_per_session = ($total_sqfeet * $skates_per_sqft ) / 100;
-        $no_rental_skates  = $skates_per_session * $rental_skates_needed;
+        $no_rental_skates  = round($skates_per_session * $rental_skates_needed);
+       
         // dd($no_rental_skates);
              $email=$request->email;
             $value= $no_rental_skates * $ice_sheets;
             $total_rental_skates =  $value;
             $figure_7= 70;
-            $percentagefigure=($figure_7 / 100)*$value;
+            $percentagefigure=round(($figure_7 / 100)*$value);
+           
             $percentagefigures=number_format($percentagefigure);
             $toalpercentagefigure=intval($percentagefigures);
             // dd($toalpercentagefigure);
             $figure_3= 30;
-            $percentagefigure3=($figure_3 / 100)*$value;
+            $percentagefigure3=round(($figure_3 / 100)*$value);
             $percentagefigures3=number_format($percentagefigure3);
             $toalpercentagefigure3=intval($percentagefigures3);
             $sum = Tab1::sum('multiple');
              $sums=number_format($sum);
          $totalmultiple=intval($sums);
+        
         //  dd($totalmultiple);
         $remainder_7 = $toalpercentagefigure % $totalmultiple;
         $quotient_7 = ($toalpercentagefigure - $remainder_7) / $totalmultiple;
-        // dd($quotient_7);
+        
         $remainder_3 = $toalpercentagefigure3 % $totalmultiple;
             $quotient_3 = ($toalpercentagefigure3 - $remainder_3) / $totalmultiple;
-          
+           
             $sumedpriorirty = Tab1::sum('priority');
             $figure_value= $sumedpriorirty*$quotient_7;
             $figure_value=number_format($figure_value);
@@ -85,9 +88,9 @@ class ApiController extends Controller
 
      foreach($vendor as $data){
         $size= $data->size;
-       $figure= $data->priority * $quotient_7;
+       $figure= $data->multiple * $quotient_7;
     // 
-       $hockey= $data->priority * $quotient_3;
+       $hockey= $data->multiple * $quotient_3;
        
 array_push($arr,$size,$figure  , $hockey);
        
@@ -111,11 +114,11 @@ $sumedt2=number_format($sumt2);
       $testf=2;
  foreach($vendort2 as $datat2){
        $sizet2= $datat2->size;
-      $resultf=$datat2->priority;
+      $resultf=$datat2->multiple;
       $figuret2=intval($resultf);
     //   
       $figuret2= $figuret2*$quotient_7t2;
-    $resulth=$datat2->priority;
+    $resulth=$datat2->multiple;
     $hockeyt2=intval($resulth);
     
       $hockeyt2= $hockeyt2*$quotient_3t2;
@@ -137,10 +140,10 @@ $sumedt3=number_format($sumt3);
       $arrt3=[];
  foreach($vendort3 as $datat3){
        $sizet3= $datat3->size;
-      $result3=$datat3->priority;
+      $result3=$datat3->multiple;
       $figuret3=intval($result3);
       $figuret3= $figuret3*$quotient_7t3;
-    $resulth3=$datat3->priority;
+    $resulth3=$datat3->multiple;
     $hockeyt3=intval($resulth3);
       $hockeyt3= $hockeyt3*$quotient_3t3;
       

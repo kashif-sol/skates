@@ -78,7 +78,8 @@
                     @foreach ($tabs_data as $tabss)
                     <tr>
                         @foreach ($tabss as $tabs)
-                            <td>{{$tabs}}</td>
+                        <?php $tab_data = number_format($tabs , 2);?>
+                            <td>{{$tab_data}}</td>
                         @endforeach
                     </tr>
                     @endforeach

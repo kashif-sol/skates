@@ -22,6 +22,7 @@
                     <td>{{$quote->width}}</td>
                     <td>
                         <a href="/quotes-detail/{{$quote->id}}"  class="btn btn-primary">Detail</a>
+                        <a href="/create-order/{{$quote->id}}"  class="btn btn-primary ml-2">Create Order</a>
                     </td>
                 </tr>
             @endforeach

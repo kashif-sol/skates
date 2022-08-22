@@ -74,6 +74,7 @@ class ApiController extends Controller
         $quotient_7 = ($toalpercentagefigure - $remainder_7) / $totalmultiple;
         
         $remainder_3 = $toalpercentagefigure3 % $totalmultiple;
+        
             $quotient_3 = ($toalpercentagefigure3 - $remainder_3) / $totalmultiple;
            
             $sumedpriorirty = Tab1::sum('priority');
@@ -81,18 +82,39 @@ class ApiController extends Controller
             $figure_value=number_format($figure_value);
             $hockey_value=$sumedpriorirty*$quotient_3;
             $hockey_value=number_format($hockey_value);
-       $vendor = DB::Table('tab_1')->get();
+       $vendor = DB::Table('tab_1')->orderBy('priority')->get();
        $arr=[];
        $fig=[];
        $hock=[];
-
+     $rem_reminder = 0;
+     $rem_reminder3 = 0;
      foreach($vendor as $data){
         $size= $data->size;
        $figure= $data->multiple * $quotient_7;
     // 
        $hockey= $data->multiple * $quotient_3;
+        
+       if($remainder_7 > 0 &&  $remainder_7 > -1)
+       {
+        $rem_reminder = $remainder_7 - $figure ;  
        
-array_push($arr,$size,$figure  , $hockey);
+        if( $rem_reminder < 0) 
+        {
+            $figure = $figure + $remainder_7;
+        }
+       }
+      
+       if($remainder_3 > 0 && $rem_reminder3 > -1)
+       {
+        $rem_reminder3 = $remainder_3 - $hockey ;  // 1 - 6 = -5 All done 
+        
+        if( $rem_reminder3 < 0) 
+        {
+            $hockey = $hockey + $remainder_3;
+        }
+       }
+       
+array_push($arr,$size,$figure  , intval($hockey));
        
 
      }
@@ -109,9 +131,11 @@ $sumedt2=number_format($sumt2);
  
            $quotient_3t2 = ($total_rental_skates - $remainder_3t2) / $totalmultiplet2;
  $sumedpriorirtyt2 = Tab2::sum('priority');
-  $vendort2 = DB::Table('tab_2')->get();
+  $vendort2 = DB::Table('tab_2')->orderBy('priority')->get();
       $arrt2=[];
       $testf=2;
+      $rem_reminder = 0;
+     $rem_reminder3 = 0;
  foreach($vendort2 as $datat2){
        $sizet2= $datat2->size;
       $resultf=$datat2->multiple;
@@ -122,6 +146,16 @@ $sumedt2=number_format($sumt2);
     $hockeyt2=intval($resulth);
     
       $hockeyt2= $hockeyt2*$quotient_3t2;
+
+      if($remainder_7t2 > 0 &&  $remainder_7t2 > -1)
+       {
+        $rem_reminder = $remainder_7t2 - $figuret2 ;  
+       
+        if( $rem_reminder < 0) 
+        {
+            $figuret2 = $figuret2 + $remainder_7t2;
+        }
+       }
       
 array_push($arrt2,$sizet2,$figuret2  );
     }
@@ -136,8 +170,10 @@ $sumedt3=number_format($sumt3);
            $quotient_3t3 = ($total_rental_skates - $remainder_3t3) / $totalmultiplet3;
  $sumedpriorirtyt2 = Tab2::sum('priority');
        
-  $vendort3 = DB::Table('tab_3')->get();
+  $vendort3 = DB::Table('tab_3')->orderBy('priority')->get();
       $arrt3=[];
+      $rem_reminder = 0;
+     $rem_reminder3 = 0;
  foreach($vendort3 as $datat3){
        $sizet3= $datat3->size;
       $result3=$datat3->multiple;
@@ -147,6 +183,16 @@ $sumedt3=number_format($sumt3);
     $hockeyt3=intval($resulth3);
       $hockeyt3= $hockeyt3*$quotient_3t3;
       
+
+     if($remainder_7t3 > 0 &&  $remainder_7t3 > -1)
+     {
+      $rem_reminder = $remainder_7t3 - $figuret3 ;  
+     
+      if( $rem_reminder < 0) 
+      {
+          $figuret3 = $figuret3 + $remainder_7t3;
+      }
+     }
 array_push($arrt3,$sizet3,$figuret3  );
 
     }

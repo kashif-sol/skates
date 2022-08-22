@@ -3,6 +3,8 @@
      @php
       ///   dd($data);
        $tabs_data = [];
+       $sum_figure = 0;
+        $sum_hockey = 0;
      @endphp
     <table class="table">
         <thead>
@@ -78,16 +80,19 @@
                     @foreach ($tabs_data as $tabss)
                     <tr>
                         @foreach ($tabss as $tabs)
-                        @if($loop->last)
-                        <?php $tab_data = number_format($tabs , 2);?>
-                        <td>{{$tab_data}}</td>
-                        @else
+                        
+                        
                         <td>{{$tabs}}</td>
-                        @endif
+                        
                            
                         @endforeach
                     </tr>
                     @endforeach
+                     <tr>
+                    <td>Total</td>
+                     <td></td>
+                      <td></td>
+                      </tr>
                 </tbody>
             </table>
 

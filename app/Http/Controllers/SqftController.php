@@ -36,6 +36,17 @@ class SqftController extends Controller
         return view('quote-detail', compact('quote_detail' , 'data'));
     }
 
+    public function create_order($quoteId)
+    {
+        $quote_detail = Quotes::find($quoteId);
+        $ApiController = new ApiController();
+        $request = new \Illuminate\Http\Request();
+        $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
+        $data = $ApiController->sqftcal($request);
+        $productId = 7802388971759;
+        dd($data);
+    }
+
     public function store(Request $request)
     {
         $post = new Sqft();

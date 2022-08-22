@@ -45,7 +45,7 @@ class SqftController extends Controller
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
         $data['tab'] = $quote_detail->tab;
-        $data['customer_id'] = 6310874185967;
+        $data['customer_id'] = $quote_detail->custId;
         $order = $this->shopify_order($data);
         $quotes = Quotes::all();
         return view('quotes', compact('quotes' , 'order'));
@@ -55,7 +55,7 @@ class SqftController extends Controller
     {
         
         $shop = User::first();
-        $productId = 7802388971759;
+        
         $customer_address = $shop->api()->rest('GET', '/admin/api/2022-04/customers/'.$order_detail['customer_id'].'/addresses.json');
         $shipping_address = [];
         if(isset($customer_address["body"]["addresses"]))
@@ -75,36 +75,47 @@ class SqftController extends Controller
             );
         }
         $tab_details = [];
+        $hockeyPid = "";
         if($order_detail['tab'] == "TAB1")
         {
             $tab_details = $order_detail['Tab1'];
+            $productsIds =  [7802388971759 , 7802799882479];
+            $hockeyPid = 7802799882479;
         }
         elseif($order_detail['tab'] == "TAB2")
         {
             $tab_details = $order_detail['Tab2'];
+            $productsIds =  [7802388971759];
         }
         elseif($order_detail['tab'] == "TAB3")
         {
             $tab_details = $order_detail['Tab3'];
+            $productsIds =  [7802799882479];
         }
         $line_items = [];
-        $product = $shop->api()->rest('GET', '/admin/api/2022-04/products/'.$productId.'.json');
-        $variants = $product['body']['container']['product']['variants'];
-        foreach ($variants as $key => $variant) 
+        foreach ($productsIds as $key => $productId) 
         {
-            foreach ($tab_details as $key => $row) 
+
+            $product = $shop->api()->rest('GET', '/admin/api/2022-04/products/'.$productId.'.json');
+            $variants = $product['body']['container']['product']['variants'];
+            foreach ($variants as $key => $variant) 
             {
-                
-                if( $variant['title'] == strtolower($row[0]))
+                foreach ($tab_details as $key => $row) 
                 {
-                    $line_items[] = array(
-                        "variant_id" => $variant['id'], //41533218980033,
-                        "quantity" =>  $row[1]
-                    );
+                    $qty = $row[1];
+                    if(!empty($hockeyPid) && $hockeyPid == $productId)
+                    {
+                        $qty = $row[2];
+                    }
+                    if( $variant['title'] == strtolower($row[0]))
+                    {
+                        $line_items[] = array(
+                            "variant_id" => $variant['id'], //41533218980033,
+                            "quantity" =>  $qty
+                        );
+                    }
                 }
             }
-           
-
         }
         
         

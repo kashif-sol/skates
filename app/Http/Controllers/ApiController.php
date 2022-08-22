@@ -28,6 +28,7 @@ class ApiController extends Controller
         $quotes->tab = $request->tab;
         $quotes->user_id = 1;
         $quotes->email = $request->email;
+        $quotes->customer_id = $request->custId;
         $quotes->save();
         $ret_array = array(
             "status" => true,

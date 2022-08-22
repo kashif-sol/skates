@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
+use App\Models\User; 
 
 class SqftController extends Controller
 {
@@ -43,8 +44,94 @@ class SqftController extends Controller
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
+        $data['tab'] = $quote_detail->tab;
+        $data['customer_id'] = 6310874185967;
+        $order = $this->shopify_order($data);
+        $quotes = Quotes::all();
+        return view('quotes', compact('quotes' , 'order'));
+    }
+
+    public function shopify_order($order_detail)
+    {
+        
+        $shop = User::first();
         $productId = 7802388971759;
-        dd($data);
+        $customer_address = $shop->api()->rest('GET', '/admin/api/2022-04/customers/'.$order_detail['customer_id'].'/addresses.json');
+        $shipping_address = [];
+        if(isset($customer_address["body"]["addresses"]))
+        {
+            $address =  $customer_address["body"]["addresses"][0] ;
+            $shipping_address  = array(
+                "first_name" => $address->first_name,
+                "last_name" => $address->last_name,
+                "address1" => $address->address1,
+                "address2" => $address->address2,
+                "company" => $address->company,
+                "phone" => $address->phone,
+                "city" => $address->city,
+                "province" => $address->province,
+                "country" => $address->country,
+                "zip" => $address->zip
+            );
+        }
+        $tab_details = [];
+        if($order_detail['tab'] == "TAB1")
+        {
+            $tab_details = $order_detail['Tab1'];
+        }
+        elseif($order_detail['tab'] == "TAB2")
+        {
+            $tab_details = $order_detail['Tab2'];
+        }
+        elseif($order_detail['tab'] == "TAB3")
+        {
+            $tab_details = $order_detail['Tab3'];
+        }
+        $line_items = [];
+        $product = $shop->api()->rest('GET', '/admin/api/2022-04/products/'.$productId.'.json');
+        $variants = $product['body']['container']['product']['variants'];
+        foreach ($variants as $key => $variant) 
+        {
+            foreach ($tab_details as $key => $row) 
+            {
+                
+                if( $variant['title'] == strtolower($row[0]))
+                {
+                    $line_items[] = array(
+                        "variant_id" => $variant['id'], //41533218980033,
+                        "quantity" =>  $row[1]
+                    );
+                }
+            }
+           
+
+        }
+        
+        
+
+        $customer = array(
+            "id" => $order_detail['customer_id'] //5995505549505
+        );
+
+        $order_data =  array(
+            "order" => array(
+                "financial_status " => "pending",
+                "line_items" =>$line_items,
+                "customer" => $customer,
+              ///  "shipping_address" => $shipping_address
+            )
+        );
+       
+        $response = $shop->api()->rest('POST', '/admin/api/2022-04/orders.json',$order_data);
+       
+        if($response['status'] == 201 || $response['status'] == 200)
+        {   
+            $id = $response['body']['container']['order']['id'];
+            
+            return array("status" => "success" , "msg" => "order created successfully." , "link" => 'https://vishal-app.myshopify.com/admin/orders/' . $id);
+        }else{
+            return array("status" => "error" , "msg" => "There is issue in creating your order. Please try again!");
+        }
     }
 
     public function store(Request $request)

@@ -72,6 +72,6 @@ Route::get('result',[TabsController::class,'result']);
 Route::post('tabstore',[TabsController::class,'save'])->name('tab.store');
 Route::post('update-tab', [TabsController::class, 'update']);
 Route::get('quotes',[SqftController::class,'quotes']);
-Route::get('/quotes-detail/{id}',[SqftController::class,'quotes_detail']);
+Route::get('/quotes-detail/{id}',[SqftController::class,'quotes_detail'])->name('quotes_detail');
 Route::get('/create-order/{id}',[SqftController::class,'create_order']);
 Route::get('quote-amount',[SqftController::class,'quote_send']);

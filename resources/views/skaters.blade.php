@@ -119,6 +119,9 @@
 
         $(function(){
             $(".edit-skaters").click(function(){
+                $("#exampleFormControlInput1").val( $(this).data("skaters"));
+                $("#exampleFormControlTextarea1").val($(this).data("rent"));
+                $("#inlineFormCustomSelectPref").val($(this).data("sqft"));
                 $("#staticBackdrop").modal("show");
             })
         })

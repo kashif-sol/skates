@@ -100,16 +100,18 @@
 
     @endif
 
+    <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="quote-amount"   method="post">
-                @csrf
+            <form action="quote-amount"   method="GET">
+               
                 <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
                 <label>Amount</label>
-                <input type="text" name="quoteAmount" id="quoteAmount" value="" >
+                <input type="text" name="quoteAmount" id="quoteAmount" value="" style="    width: 20%;">
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
+    </div>
     </div>
 
 

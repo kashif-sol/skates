@@ -87,12 +87,16 @@
                     <td>{{ $user->ofskaterssqfts }}</td>
                     <td>{{ $user->ofrentalskatersneeded }}</td>
                     <td></td>
-                    <td> <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $user->sqfts_id }}').submit();" class="btn btn-primary"> Delete</a></td>
+                    <td> 
+                        <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $user->sqfts_id }}').submit();" class="btn btn-primary"> Delete</a>
+                        <a data-skaters="{{ $user->ofskaterssqfts }}" data-rent="{{ $user->ofrentalskatersneeded }}" data-sqft="{{$save->id}}" href="#" class="btn btn-primary edit-skaters"> Edit</a>
+                    </td>
                     <td></td>
-                        <form id="delete-form-{{ $user->sqfts_id }}" + action="{{ route('skater.destroy', $user->sqfts_id) }}"
+                    <form id="delete-form-{{ $user->sqfts_id }}" + action="{{ route('skater.destroy', $user->sqfts_id) }}"
                         method="post">
                         @csrf @method('DELETE')
                     </form>
+                     
 
                   
                    
@@ -110,3 +114,12 @@
     </table>
 
 
+
+    <script>
+
+        $(function(){
+            $(".edit-skaters").click(function(){
+                $("#staticBackdrop").modal("show");
+            })
+        })
+    </script>

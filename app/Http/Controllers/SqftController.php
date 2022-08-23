@@ -242,6 +242,7 @@ class SqftController extends Controller
         $data->ofskaterssqfts = $ofskaterssqfts;
         $data->ofrentalskatersneeded = $ofrentalskatersneeded;
         $data->save();
+        return redirect()->route('skaters', []);
         return redirect()->back();
     }
     public function skater(Request $request)

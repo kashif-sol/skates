@@ -234,7 +234,10 @@ class SqftController extends Controller
         $skater_id = $request->sqfts_id;
         $ofskaterssqfts = $request->ofskaterssqfts;
         $ofrentalskatersneeded = $request->ofrentalskatersneeded;
-        $data = new SkatersSqft();
+
+        $data = SkatersSqft::where('sqfts_id','=',$skater_id)->first();
+        if(empty($data))
+            $data = new SkatersSqft();
         $data->sqfts_id = $skater_id;
         $data->ofskaterssqfts = $ofskaterssqfts;
         $data->ofrentalskatersneeded = $ofrentalskatersneeded;

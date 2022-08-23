@@ -89,7 +89,7 @@
                     </tr>
                     @endforeach
                      <tr>
-                    <td>Total</td>
+                    <td></td>
                      <td></td>
                       <td></td>
                       </tr>
@@ -99,5 +99,17 @@
         </div>
 
     @endif
+
+    <div class="row">
+        <div class="col-md-12">
+            <form action="quote-amount"   method="post">
+                @csrf
+                <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
+                <label>Amount</label>
+                <input type="text" name="quoteAmount" id="quoteAmount" value="" >
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
 
 

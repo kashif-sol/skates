@@ -27,6 +27,17 @@ class SqftController extends Controller
         return view('quotes', compact('quotes'));
     }
 
+    public function quote_send(Request $request)
+    {
+        $quote_detail = Quotes::find($request->quoteId);
+        $quoteAmount = $request->quoteAmount;
+        $email = $quote_detail->email;
+        $quote_detail->amount = $quoteAmount;
+        $quote_detail->ice_sheet = $quote_detail->ice_sheets;
+        $quote_detail->save();
+        return redirect()->route('/quotes-detail/' . $request->quoteId);
+    }
+
     public function quotes_detail($quoteId)
     {
         $quote_detail = Quotes::find($quoteId);

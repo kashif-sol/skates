@@ -107,7 +107,7 @@
                
                 <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
                 <label>Amount</label>
-                <input type="text" name="quoteAmount" id="quoteAmount" value="" style="    width: 20%;">
+                <input type="text" name="quoteAmount" id="quoteAmount" value="{{$quote_detail->amount}}" style="    width: 20%;">
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>

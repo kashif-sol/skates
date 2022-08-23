@@ -9,6 +9,6 @@ class Quotes extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'ice_sheet', 'length' , 'width', 'tab','user_id','email', 'custId',
+        'ice_sheet', 'length' , 'width', 'tab','user_id','email', 'custId' , 'amount',
     ];
 }

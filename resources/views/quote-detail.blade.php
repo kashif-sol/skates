@@ -103,7 +103,7 @@
     <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form action="quote-amount"   method="GET">
+            <form action="route('quote-send')"   method="GET">
                
                 <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
                 <label>Amount</label>

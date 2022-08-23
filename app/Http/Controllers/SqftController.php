@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
 use App\Models\User; 
+use Illuminate\Support\Facades\Mail;
 
 class SqftController extends Controller
 {
@@ -33,9 +34,15 @@ class SqftController extends Controller
         $quoteAmount = $request->quoteAmount;
         $email = $quote_detail->email;
         $quote_detail->amount = $quoteAmount;
-        $quote_detail->ice_sheet = $quote_detail->ice_sheets;
+        $quote_detail->ice_sheet = $quote_detail->ice_sheet;
         $quote_detail->save();
-        return redirect()->route('quotes_detail' , [$request->quoteId]);
+        $details = [
+            'amount' => $quoteAmount,
+            'email' =>$email
+        ];
+       
+        Mail::to($email)->send(new \App\Mail\SendQuotePrice($details));
+        return redirect()->route('quotes_detail'  , [$request->quoteId]);
     }
 
     public function quotes_detail($quoteId)

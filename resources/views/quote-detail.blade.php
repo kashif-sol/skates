@@ -99,6 +99,37 @@
         </div>
 
     @endif
+ <h2>Customer QTY</h2>
+ <table class="table">
+        <thead>
+            <tr class="table-light">
+                <th scope="col">Size</th>
+                <th scope="col">Figure</th>
+                <th scope="col">Hockey</th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if(isset($tab4_data))
+           
+                
+              
+                @foreach ($tab4_data as $record)
+                <tr class="table-light">
+                    <td>{{$record->size}}</td>
+                    <td>{{$record->figure}}</td>
+                    <td>{{$record->hockey}}</td>
+                      </tr>
+                @endforeach
+                
+                    
+              
+            
+            @endif
+
+        </tbody>
+
+    </table>
 
     <div class="container">
     <div class="row">

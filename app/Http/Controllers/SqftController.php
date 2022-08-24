@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SkatersSqft;
 use App\Models\Sqft;
 use App\Models\Quotes;
+use App\Models\Tab4;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
@@ -48,11 +49,12 @@ class SqftController extends Controller
     public function quotes_detail($quoteId)
     {
         $quote_detail = Quotes::find($quoteId);
+        $tab4_data = Tab4::where("quote_id" , $quoteId)->get();
         $ApiController = new ApiController();
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
-        return view('quote-detail', compact('quote_detail' , 'data'));
+        return view('quote-detail', compact('quote_detail' , 'data' , 'tab4_data'));
     }
 
     public function create_order($quoteId)

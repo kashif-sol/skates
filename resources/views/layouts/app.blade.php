@@ -70,9 +70,9 @@
     <header>
     <div class="buttons text-left" style="padding-top: 27px;background: #fbf1f1;; border-radius: 2px;padding-bottom: 7px;">
     <a href="{{ route('main') }}" style="margin-left: 10px;" class="btn btn-primary">SQFT</a>
-         <a href="skaters" style="margin-left: 16px;" class="btn btn-primary">Skaters</a>
-             <a href="result" style="margin-left: 16px;" class="btn btn-primary">Size</a>
-             <a href="quotes" style="margin-left: 16px;" class="btn btn-primary">Quotes</a>
+         <a href="/skaters" style="margin-left: 16px;" class="btn btn-primary">Skaters</a>
+             <a href="/result" style="margin-left: 16px;" class="btn btn-primary">Size</a>
+             <a href="/quotes" style="margin-left: 16px;" class="btn btn-primary">Quotes</a>
          
         
       

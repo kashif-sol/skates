@@ -6,6 +6,7 @@ use App\Models\Sqft;
 use App\Models\Tab1;
 use App\Models\Tab2;
 use App\Models\Tab3;
+use App\Models\Tab4;
 use App\Models\Quotes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,8 @@ class ApiController extends Controller
 
     public function quote(Request $request)
     {
+        
+         
         $quotes = new Quotes();
         $quotes->ice_sheet = $request->ice_sheets;
         $quotes->length = $request->length;
@@ -30,6 +33,29 @@ class ApiController extends Controller
         $quotes->email = $request->email;
         $quotes->customer_id = $request->custId;
         $quotes->save();
+
+        $tab4_qty = [];
+        $tab4 = json_decode( $request->tab_qty,true);
+        $string = '';
+        foreach ($tab4 as $key => $row) {
+            $string .= $row['name'].'='.$row['value'].'&';
+        }
+        parse_str(rtrim($string,'&'),$data);
+        $tab4_qty = json_encode($data);
+
+        foreach ($data as $key => $qty_row) {
+         
+             $size =  $key;
+             $figure = $qty_row[0];
+             $hockey = $qty_row[1];
+             $Tab4 = new Tab4();
+             $Tab4->size = $size;
+             $Tab4->figure = $figure;
+             $Tab4->hockey = $hockey;
+             $Tab4->quote_id = $quotes->id;
+             $Tab4->save();
+        }
+
         $ret_array = array(
             "status" => true,
             "message" => "Your Quote submitted."

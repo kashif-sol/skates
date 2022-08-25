@@ -65,7 +65,7 @@ class SqftController extends Controller
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
         $data['tab'] = $quote_detail->tab;
-        $data['customer_id'] = $quote_detail->custId;
+        $data['customer_id'] = $quote_detail->customer_id;
         $order = $this->shopify_order($data);
         $quotes = Quotes::all();
         return view('quotes', compact('quotes' , 'order'));

@@ -70,7 +70,7 @@
                     <td>
                     </td>
                     <td></td>
-                    <form class="delete_form"  name="delete_form" onsubmit="return validateForm()" action="{{ route('sqfts.destroy', $setting->id) }}" method="post">
+                    <form id="delete-form-{{ $setting->id }}" class="delete_form"  name="delete_form"  action="{{ route('sqfts.destroy', $setting->id) }}" method="post">
                         @csrf @method('DELETE')
                     </form>
                 </tr>

@@ -64,8 +64,8 @@
                     <td>{{ $setting->max_sqft }}</td>
 
                     <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
-                    <td> <a class="btn btn-primary" href="" id="editCompany" data-toggle="modal"
-                            data-target='#practice_modal' data-id="{{ $setting->id }}">Edit</a> 
+                    <td> <a class="btn btn-primary" href="#" class="editCompany" id="editCompany"
+                         data-id="{{ $setting->id }}">Edit</a> 
                             <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); deleteRecord('delete-form-{{ $setting->id }}',this)" class="btn btn-primary"> Delete</a> </td>
                     <td>
                     </td>
@@ -176,8 +176,11 @@
                 });
             });
 
+            $('body').on('click', '.btn-close', function(event) {
+                $("#practice_modal").modal("hide");
+            });
 
-            $('body').on('click', '#editCompany', function(event) {
+            $('body').on('click', '.editCompany', function(event) {
 
                 event.preventDefault();
                 var id = $(this).data('id');
@@ -189,6 +192,7 @@
                     $('#color_id').val(data.data.id);
                     $('#sqft').val(data.data.max_sqft);
                     $('#min_sqft').val(data.data.min_sqft);
+                    $("#practice_modal").modal("show");
                 })
             });
 

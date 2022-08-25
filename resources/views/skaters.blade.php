@@ -14,7 +14,7 @@
                     <form action="submitform" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Sqfts</label>
+                            <label for="exampleFormControlSelect1">SQFT</label>
                             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="sqfts_id" required>
 
                                 <option selected>Choose...</option>
@@ -26,14 +26,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Of/skaterssqfts</label>
-                            <input type="text" class="form-control" name="ofskaterssqfts"
-                                id="exampleFormControlInput1" placeholder="Enter ofskaterssqfts" required>
+                            <label for="exampleFormControlInput1">Of/Skaterssqfts</label>
+                            <input type="text" class="form-control" name="ofskatersSqfts"
+                                id="exampleFormControlInput1" placeholder="Enter Of/SkatersSqfts" required>
                         </div>
 
 
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Of/Rental/skatersneeded</label>
+                            <label for="exampleFormControlTextarea1">Of/Rental/Skaters needed</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" name="ofrentalskatersneeded" rows="3" required></textarea>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>

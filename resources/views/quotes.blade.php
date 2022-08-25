@@ -5,9 +5,9 @@
         <thead>
             <tr class="table-light">
                 <th scope="col">Email</th>
-                <th scope="col">ice sheets</th>
-                <th scope="col">length</th>
-                <th scope="col">width</th>
+                <th scope="col">Ice sheets</th>
+                <th scope="col">Length</th>
+                <th scope="col">Width</th>
                 <th scope="col"></th>
                 </th>
             </tr>

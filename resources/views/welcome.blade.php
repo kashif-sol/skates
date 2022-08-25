@@ -63,9 +63,8 @@
                     <td>{{ $setting->min_sqft }}</td>
                     <td>{{ $setting->max_sqft }}</td>
 
-                    <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
-                    <td> <a class="btn btn-primary" href="#" class="editCompany" id="editCompany"
-                         data-id="{{ $setting->id }}">Edit</a> 
+                    
+                    <td> <a class="btn btn-primary editCompany" href="#"   id="editCompany" data-id="{{ $setting->id }}">Edit</a> 
                             <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); deleteRecord('delete-form-{{ $setting->id }}',this)" class="btn btn-primary"> Delete</a> </td>
                     <td>
                     </td>

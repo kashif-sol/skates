@@ -66,7 +66,7 @@
                     <!-- <td><a class="btn btn-primary" href="{{ route('sqfts.edit', $setting->id) }}">Edit</a></td> -->
                     <td> <a class="btn btn-primary" href="" id="editCompany" data-toggle="modal"
                             data-target='#practice_modal' data-id="{{ $setting->id }}">Edit</a> 
-                            <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); document.getElementById( 'delete-form-{{ $setting->id }}').submit();" class="btn btn-primary"> Delete</a> </td>
+                            <a href="{{ route('sqfts') }}"onclick="event.preventDefault(); deleteRecord('delete-form-{{ $setting->id }}',this)" class="btn btn-primary"> Delete</a> </td>
                     <td>
                     </td>
                     <td></td>
@@ -131,25 +131,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
 
-        function validateForm() {
-            if (confirm("Are you sure! you want to delete!") == true) {
-
-            } else {
-              return true;
+        var deleteRecord = function(value,object) {
+            if (!confirm("Are you sure! you want to delete!") == true) {
+                e.stopImmediatePropagation();
+                e.preventDefault();
+            }else{
+                document.getElementById( value).submit();
             }
-          }
+        };
+
 
         $(document).ready(function() {
-
-            $(".delete_form").submit(function(e){
-                 e.preventDefault();
-                 if (confirm("Are you sure! you want to delete!") == true) {
-                    $(this).submit();
-                } else {
-                  return false;
-                }
-
-              });
 
             $.ajaxSetup({
                 headers: {

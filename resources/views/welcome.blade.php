@@ -43,7 +43,7 @@
             <tr class="table-light">
               
              
-                <th scope="col">Mininmum Sqft</th>
+                <th scope="col">Minimum Sqft</th>
                 <th scope="col">Maximum Sqft</th>
                 <th scope="col">Action</th>
                 <th scope="col" style="text-align: right"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Create Sqft </button>
@@ -70,8 +70,7 @@
                     <td>
                     </td>
                     <td></td>
-                    <form id="delete-form-{{ $setting->id }}" + action="{{ route('sqfts.destroy', $setting->id) }}"
-                        method="post">
+                    <form class="delete_form"  name="delete_form" onsubmit="return validateForm()" action="{{ route('sqfts.destroy', $setting->id) }}" method="post">
                         @csrf @method('DELETE')
                     </form>
                 </tr>
@@ -131,6 +130,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
+
+        function validateForm() {
+            if (confirm("Are you sure! you want to delete!") == true) {
+
+            } else {
+              return true;
+            }
+          }
+
         $(document).ready(function() {
 
             $.ajaxSetup({

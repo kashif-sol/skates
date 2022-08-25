@@ -141,6 +141,16 @@
 
         $(document).ready(function() {
 
+            $(".delete_form").submit(function(e){
+                 e.preventDefault();
+                 if (confirm("Are you sure! you want to delete!") == true) {
+                    $(this).submit();
+                } else {
+                  return false;
+                }
+
+              });
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

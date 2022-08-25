@@ -15,7 +15,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Sqfts</label>
-                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="sqfts_id">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="sqfts_id" required>
 
                                 <option selected>Choose...</option>
                                 @if(isset ($dataa))
@@ -28,13 +28,13 @@
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Of/skaterssqfts</label>
                             <input type="text" class="form-control" name="ofskaterssqfts"
-                                id="exampleFormControlInput1" placeholder="Enter ofskaterssqfts">
+                                id="exampleFormControlInput1" placeholder="Enter ofskaterssqfts" required>
                         </div>
 
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Of/Rental/skatersneeded</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="ofrentalskatersneeded" rows="3"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="ofrentalskatersneeded" rows="3" required></textarea>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>

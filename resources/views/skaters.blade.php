@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Of/Skaterssqfts</label>
-                            <input type="text" class="form-control" name="ofskatersSqfts"
+                            <input type="text" class="form-control" name="ofskaterssqfts"
                                 id="exampleFormControlInput1" placeholder="Enter Of/SkatersSqfts" required>
                         </div>
 

@@ -6,6 +6,7 @@ use App\Models\SkatersSqft;
 use App\Models\Sqft;
 use App\Models\Quotes;
 use App\Models\Tab4;
+use App\Models\QuoteSizes;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,27 @@ class SqftController extends Controller
     {
         $quotes = Quotes::all();
         return view('quotes', compact('quotes'));
+    }
+    
+    public function edit_quote_tab(Request $request)
+    {
+        QuoteSizes::where("quote_id" , $request->quoteId)->delete();
+        foreach ($request->tab4 as $key => $row) {
+            $size = $row[0];
+            $figure = $row[1];
+            $hockey = 0;
+            if(isset($row[2]))
+                $hockey = $row[2];
+            $QuoteSizes = new QuoteSizes();
+            $QuoteSizes->size = $size ;
+            $QuoteSizes->figure = $figure;
+            $QuoteSizes->hockey = $hockey;
+            $QuoteSizes->quote_id = $request->quoteId;
+            $QuoteSizes->save();
+
+        }
+
+        return redirect()->route('quotes_detail'  , [$request->quoteId]);
     }
 
     public function quote_send(Request $request)
@@ -54,7 +76,8 @@ class SqftController extends Controller
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
-        return view('quote-detail', compact('quote_detail' , 'data' , 'tab4_data'));
+        $quote_tab_data =  QuoteSizes::where("quote_id" , $quoteId)->get()->toArray();
+        return view('quote-detail', compact('quote_detail' , 'data' , 'tab4_data' , 'quote_tab_data'));
     }
 
     public function create_order($quoteId)
@@ -66,6 +89,28 @@ class SqftController extends Controller
         $data = $ApiController->sqftcal($request);
         $data['tab'] = $quote_detail->tab;
         $data['customer_id'] = $quote_detail->customer_id;
+        $quote_tab_data =  QuoteSizes::where("quote_id" , $quoteId)->get()->toArray();
+        $qty_data = [];
+        if(!empty( $quote_tab_data ))
+        {
+            foreach( $quote_tab_data as $qtab_date)
+            {
+                $qty_data[] = array(
+                    $qtab_date['size'],
+                    $qtab_date['figure'],
+                    $qtab_date['hockey']
+                );
+               
+            }
+        }else{
+            if($quote_detail->tab == "TAB1")
+                $qty_data = $data["Tab1"];
+            else if($quote_detail->tab == "TAB2")
+                $qty_data = $data["Tab2"];
+            else if($quote_detail->tab == "TAB3")
+                $qty_data = $data["Tab3"];
+        }
+        $data["quote_qty_tab"] = $qty_data;
         $order = $this->shopify_order($data);
         $quotes = Quotes::all();
         return view('quotes', compact('quotes' , 'order'));
@@ -98,18 +143,15 @@ class SqftController extends Controller
         $hockeyPid = "";
         if($order_detail['tab'] == "TAB1")
         {
-            $tab_details = $order_detail['Tab1'];
             $productsIds =  [7802388971759 , 7802799882479];
             $hockeyPid = 7802799882479;
         }
         elseif($order_detail['tab'] == "TAB2")
         {
-            $tab_details = $order_detail['Tab2'];
             $productsIds =  [7802388971759];
         }
         elseif($order_detail['tab'] == "TAB3")
         {
-            $tab_details = $order_detail['Tab3'];
             $productsIds =  [7802799882479];
         }
         $line_items = [];
@@ -120,7 +162,7 @@ class SqftController extends Controller
             $variants = $product['body']['container']['product']['variants'];
             foreach ($variants as $key => $variant) 
             {
-                foreach ($tab_details as $key => $row) 
+                foreach ($order_detail['quote_qty_tab'] as $key => $row) 
                 {
                     $qty = $row[1];
                     if(!empty($hockeyPid) && $hockeyPid == $productId)

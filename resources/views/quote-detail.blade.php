@@ -5,6 +5,7 @@
        $tabs_data = [];
        $sum_figure = 0;
         $sum_hockey = 0;
+      ///dd($quote_tab_data);
      @endphp
     <table class="table">
         <thead>
@@ -51,6 +52,7 @@
 
         <div class="row  p-3">
             <h2>Tab Values</h2>
+            <form method="POST" action="{{route('edit-quote-tab')}}" >
             <table class="table">
                 <thead>
                     <tr class="table-light">
@@ -63,6 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if(empty($quote_tab_data))
                     @if($quote_detail->tab == "TAB1")
                         @php 
                             $tabs_data = $data['Tab1']; 
@@ -77,12 +80,17 @@
                         @endphp
                     @endif
 
-                    @foreach ($tabs_data as $tabss)
+                    @foreach ($tabs_data as $index => $tabss)
+                    @php
+                        $size = $tabss[0];
+                    @endphp
                     <tr>
                         @foreach ($tabss as $tabs)
                         
                         
-                        <td>{{$tabs}}</td>
+                        <td>
+                            <input type="text" value="{{$tabs}}" name="tab4[{{$size}}][]" >
+                        </td>
                         
                            
                         @endforeach
@@ -93,8 +101,36 @@
                      <td></td>
                       <td></td>
                       </tr>
+                @else 
+
+                 @foreach ($quote_tab_data as $tabs)
+                    <tr>
+                        <td>
+                            <input type="text" value="{{$tabs["size"]}}" name="tab4[{{$tabs["size"]}}][]" >
+                        </td>
+                        <td>
+                            <input type="text" value="{{$tabs["figure"]}}" name="tab4[{{$tabs["size"]}}][]" >
+                        </td>
+                        @if(!empty($tabs["hockey"]) && $tabs["hockey"] > 0)
+                            <td>
+                                <input type="text" value="{{$tabs["hockey"]}}" name="tab4[{{$tabs["size"]}}][]" >
+                            </td>
+                        @else
+                         <input type="text" value="0" name="tab4[{{$tabs["size"]}}][]" >
+                        @endif
+                     </tr>
+                        
+                @endforeach
+
+               
+
+                @endif
+    
                 </tbody>
             </table>
+            <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
+             <button type="submit" class="btn btn-primary" style="float: right;">Save</button>
+            </form>
 
         </div>
 

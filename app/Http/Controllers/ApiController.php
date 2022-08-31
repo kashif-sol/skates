@@ -32,6 +32,7 @@ class ApiController extends Controller
         $quotes->user_id = 1;
         $quotes->email = $request->email;
         $quotes->customer_id = $request->custId;
+        $quotes->addon_on = $request->addon;
         $quotes->save();
 
         $tab4_qty = [];
@@ -77,10 +78,11 @@ class ApiController extends Controller
      
         $skates_per_session = ($total_sqfeet * $skates_per_sqft ) / 100;
         $no_rental_skates  = round($skates_per_session * $rental_skates_needed);
+        $no_rental_skates  = round($no_rental_skates * $ice_sheets);
        
         // dd($no_rental_skates);
              $email=$request->email;
-            $value= $no_rental_skates * $ice_sheets;
+            $value= $no_rental_skates;
             $total_rental_skates =  $value;
             $figure_7= 70;
             $percentagefigure=round(($figure_7 / 100)*$value);
@@ -123,21 +125,43 @@ class ApiController extends Controller
         
        if($remainder_7 > 0 &&  $remainder_7 > -1)
        {
+        if($remainder_7 < $figure )
+         {
+            $new_result=$remainder_7;
+            $remainder_7 = $remainder_7 - $figure;  
+
+         }
+         else{
+            $new_result=$figure - $remainder_7;
+            $remainder_7 = $figure - $remainder_7;  
+         } 
         $rem_reminder = $remainder_7 - $figure ;  
        
         if( $rem_reminder < 0) 
         {
-            $figure = $figure + $remainder_7;
+            $figure = $figure + $new_result;
         }
        }
       
-       if($remainder_3 > 0 && $rem_reminder3 > -1)
+       if($remainder_3 > 0 && $remainder_3 > -1)
        {
+
+         if($remainder_3 < $hockey )
+         {
+            $new_result=$remainder_3;
+            $remainder_3 = $remainder_3 - $hockey;  
+
+         }
+         else{
+            $new_result=$hockey - $remainder_3;
+            $remainder_3 = $hockey - $remainder_3;  
+         } 
+
         $rem_reminder3 = $remainder_3 - $hockey ;  // 1 - 6 = -5 All done 
         
         if( $rem_reminder3 < 0) 
         {
-            $hockey = $hockey + $remainder_3;
+            $hockey = $hockey + $new_result;
         }
        }
        
@@ -176,11 +200,22 @@ $sumedt2=number_format($sumt2);
 
       if($remainder_7t2 > 0 &&  $remainder_7t2 > -1)
        {
+
+         if($remainder_7t2 < $figuret2 )
+         {
+            $new_result=$remainder_7t2;
+            $remainder_7t2 = $remainder_7t2 - $figuret2;  
+
+         }
+         else{
+            $new_result=$figuret2 - $remainder_7t2;
+            $remainder_7t2 = $figuret2 - $remainder_7t2;  
+         } 
         $rem_reminder = $remainder_7t2 - $figuret2 ;  
        
         if( $rem_reminder < 0) 
         {
-            $figuret2 = $figuret2 + $remainder_7t2;
+            $figuret2 = $figuret2 + $new_result;
         }
        }
       
@@ -213,11 +248,21 @@ $sumedt3=number_format($sumt3);
 
      if($remainder_7t3 > 0 &&  $remainder_7t3 > -1)
      {
+        if($remainder_7t3 < $figuret3 )
+         {
+            $new_result=$remainder_7t3;
+            $remainder_7t3 = $remainder_7t3 - $figuret3;  
+
+         }
+         else{
+            $new_result=$figuret3 - $remainder_7t3;
+            $remainder_7t3 = $figuret3 - $remainder_7t3;  
+         } 
       $rem_reminder = $remainder_7t3 - $figuret3 ;  
      
       if( $rem_reminder < 0) 
       {
-          $figuret3 = $figuret3 + $remainder_7t3;
+          $figuret3 = $figuret3 + $new_result;
       }
      }
 array_push($arrt3,$sizet3,$figuret3  );

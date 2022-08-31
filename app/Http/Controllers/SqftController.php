@@ -83,12 +83,14 @@ class SqftController extends Controller
     public function create_order($quoteId)
     {
         $quote_detail = Quotes::find($quoteId);
+        
         $ApiController = new ApiController();
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
         $data['tab'] = $quote_detail->tab;
         $data['customer_id'] = $quote_detail->customer_id;
+        $data['add_on'] = $quote_detail->addon_on;
         $quote_tab_data =  QuoteSizes::where("quote_id" , $quoteId)->get()->toArray();
         $qty_data = [];
         if(!empty( $quote_tab_data ))
@@ -120,7 +122,8 @@ class SqftController extends Controller
     {
         
         $shop = User::first();
-        
+        $rental_skates_needed = $order_detail['no_rental_skates_needed'];
+        $add_on = $order_detail["add_on"];
         $customer_address = $shop->api()->rest('GET', '/admin/api/2022-04/customers/'.$order_detail['customer_id'].'/addresses.json');
         $shipping_address = [];
         if(isset($customer_address["body"]["addresses"]))
@@ -141,6 +144,11 @@ class SqftController extends Controller
         }
         $tab_details = [];
         $hockeyPid = "";
+        $productsIds =  [7815410974959];
+        if( $rental_skates_needed < 150)
+            $productsIds =  [7815410385135];
+       
+        /*
         if($order_detail['tab'] == "TAB1")
         {
             $productsIds =  [7802388971759 , 7802799882479];
@@ -154,6 +162,7 @@ class SqftController extends Controller
         {
             $productsIds =  [7802799882479];
         }
+        */
         $line_items = [];
         foreach ($productsIds as $key => $productId) 
         {
@@ -162,6 +171,12 @@ class SqftController extends Controller
             $variants = $product['body']['container']['product']['variants'];
             foreach ($variants as $key => $variant) 
             {
+                $line_items[] = array(
+                    "variant_id" => $variant['id'], 
+                    "quantity" =>  $rental_skates_needed
+                );
+
+                /*
                 foreach ($order_detail['quote_qty_tab'] as $key => $row) 
                 {
                     $qty = $row[1];
@@ -177,10 +192,17 @@ class SqftController extends Controller
                         );
                     }
                 }
+                */
             }
         }
         
-        
+        if(isset( $add_on) &&  $add_on == 1)
+        {
+            $line_items[] = array(
+                "variant_id" => 43252231831791, 
+                "quantity" =>  1
+            );
+        }
 
         $customer = array(
             "id" => $order_detail['customer_id'] //5995505549505

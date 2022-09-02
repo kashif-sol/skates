@@ -1,6 +1,14 @@
 @include('layouts.app')
   
-     
+     @if(isset($order) && !empty($order))
+
+        @if(!empty($order["msg"]))
+            <div class="alert alert-primary" role="alert">
+                {{ $order["msg"] }} - <a href="{{ $order["link"] }}">Check Order Detail</a>
+            </div>
+        @endif
+
+     @endif
     <table class="table">
         <thead>
             <tr class="table-light">
@@ -22,7 +30,11 @@
                     <td>{{$quote->width}}</td>
                     <td>
                         <a href="/quotes-detail/{{$quote->id}}"  class="btn btn-primary">Detail</a>
-                        <a href="/create-order/{{$quote->id}}"  class="btn btn-primary ml-2">Create Order</a>
+                        @if($quote->status != 1 )
+                            <a href="/create-order/{{$quote->id}}"  class="btn btn-primary ml-2">Create Order</a>
+                        @else 
+                         <a href="#"  disabled class="btn btn-primary ml-2 disabled">Order Created</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

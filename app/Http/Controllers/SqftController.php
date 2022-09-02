@@ -114,6 +114,11 @@ class SqftController extends Controller
         }
         $data["quote_qty_tab"] = $qty_data;
         $order = $this->shopify_order($data);
+        if($order["status"] == "success")
+        {
+            $quote_detail->status = 1;
+            $quote_detail->save();
+        }
         $quotes = Quotes::all();
         return view('quotes', compact('quotes' , 'order'));
     }
@@ -223,9 +228,9 @@ class SqftController extends Controller
         {   
             $id = $response['body']['container']['order']['id'];
             
-            return array("status" => "success" , "msg" => "order created successfully." , "link" => 'https://vishal-app.myshopify.com/admin/orders/' . $id);
+            return array("status" => "success" , "msg" => "Order created successfully." , "link" => 'https://vishal-app.myshopify.com/admin/orders/' . $id);
         }else{
-            return array("status" => "error" , "msg" => "There is issue in creating your order. Please try again!");
+            return array("status" => "error" , "msg" => "There is issue in creating your order. Please try again!" , "link" => "");
         }
     }
 

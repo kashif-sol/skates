@@ -88,6 +88,7 @@ class SqftController extends Controller
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
         $data = $ApiController->sqftcal($request);
+        // dd($data);
         $data['tab'] = $quote_detail->tab;
         $data['customer_id'] = $quote_detail->customer_id;
         $data['add_on'] = $quote_detail->addon_on;
@@ -218,14 +219,14 @@ class SqftController extends Controller
         }
         if(isset( $addon_on_2) &&  $addon_on_2 == 1)
         {
-            $line_items_2[] = array(
+            $line_items[] = array(
                 "variant_id" => 43287282647279, 
                 "quantity" =>  1
             );
         }
         if(isset( $addon_on_3) &&  $addon_on_3 == 1)
         {
-            $line_items_3[] = array(
+            $line_items[] = array(
                 "variant_id" => 43287298277615, 
                 "quantity" =>  1
             );
@@ -239,8 +240,6 @@ class SqftController extends Controller
             "order" => array(
                 "financial_status " => "pending",
                 "line_items" =>$line_items,
-                "line_items_2" =>$line_items_2,
-                "line_items_3" =>$line_items_3,
                 "customer" => $customer,
               ///  "shipping_address" => $shipping_address
             )

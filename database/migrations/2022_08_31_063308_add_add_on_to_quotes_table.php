@@ -15,6 +15,8 @@ class AddAddOnToQuotesTable extends Migration
     {
         Schema::table('quotes', function (Blueprint $table) {
             $table->integer('addon_on')->nullable();
+            $table->integer('addon_on_2')->nullable();
+            $table->integer('addon_on_3')->nullable();
         });
     }
 

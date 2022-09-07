@@ -33,10 +33,13 @@ class ApiController extends Controller
         $quotes->email = $request->email;
         $quotes->customer_id = $request->custId;
         $quotes->addon_on = $request->addon;
+      $quotes->addon_on_2=$request->addon_on_2;
+      $quotes->addon_on_3=$request->addon_on_3;
         $quotes->save();
 
         $tab4_qty = [];
         $tab4 = json_decode( $request->tab_qty,true);
+   
         $string = '';
         foreach ($tab4 as $key => $row) {
             $string .= $row['name'].'='.$row['value'].'&';

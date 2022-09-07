@@ -91,6 +91,8 @@ class SqftController extends Controller
         $data['tab'] = $quote_detail->tab;
         $data['customer_id'] = $quote_detail->customer_id;
         $data['add_on'] = $quote_detail->addon_on;
+        $data['addon_on_2'] = $quote_detail->addon_on_2;
+        $data['addon_on_3'] = $quote_detail->addon_on_3;
         $quote_tab_data =  QuoteSizes::where("quote_id" , $quoteId)->get()->toArray();
         $qty_data = [];
         if(!empty( $quote_tab_data ))
@@ -129,6 +131,8 @@ class SqftController extends Controller
         $shop = User::first();
         $rental_skates_needed = $order_detail['no_rental_skates_needed'];
         $add_on = $order_detail["add_on"];
+        $addon_on_2 = $order_detail["addon_on_2"];
+        $addon_on_3 = $order_detail["addon_on_3"];
         $customer_address = $shop->api()->rest('GET', '/admin/api/2022-04/customers/'.$order_detail['customer_id'].'/addresses.json');
         $shipping_address = [];
         if(isset($customer_address["body"]["addresses"]))
@@ -169,11 +173,15 @@ class SqftController extends Controller
         }
         */
         $line_items = [];
+        $line_items_2 = [];
+        $line_items_3 = [];
         foreach ($productsIds as $key => $productId) 
         {
 
             $product = $shop->api()->rest('GET', '/admin/api/2022-04/products/'.$productId.'.json');
+            // dd($product);
             $variants = $product['body']['container']['product']['variants'];
+           
             foreach ($variants as $key => $variant) 
             {
                 $line_items[] = array(
@@ -208,6 +216,20 @@ class SqftController extends Controller
                 "quantity" =>  1
             );
         }
+        if(isset( $addon_on_2) &&  $addon_on_2 == 1)
+        {
+            $line_items_2[] = array(
+                "variant_id" => 43287282647279, 
+                "quantity" =>  1
+            );
+        }
+        if(isset( $addon_on_3) &&  $addon_on_3 == 1)
+        {
+            $line_items_3[] = array(
+                "variant_id" => 43287298277615, 
+                "quantity" =>  1
+            );
+        }
 
         $customer = array(
             "id" => $order_detail['customer_id'] //5995505549505
@@ -217,6 +239,8 @@ class SqftController extends Controller
             "order" => array(
                 "financial_status " => "pending",
                 "line_items" =>$line_items,
+                "line_items_2" =>$line_items_2,
+                "line_items_3" =>$line_items_3,
                 "customer" => $customer,
               ///  "shipping_address" => $shipping_address
             )

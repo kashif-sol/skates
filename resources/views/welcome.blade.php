@@ -46,7 +46,7 @@
                 <th scope="col">Minimum Sqft</th>
                 <th scope="col">Maximum Sqft</th>
                 <th scope="col">Action</th>
-                <th scope="col" style="text-align: right"> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Create Sqft </button>
+                <th scope="col" style="text-align: right"> <button type="button" class="btn btn-primary btn-create" > Create Sqft </button>
 </th>
 <th scope="col"></th>
 
@@ -117,15 +117,12 @@
     <!-- Core plugin JavaScript-->
     <script src="public/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="public/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="public/vendor/chart.js/Chart.min.js"></script>
+
+
 
     <!-- Page level custom scripts -->
-    <script src="public/js/demo/chart-area-demo.js"></script>
-    <script src="public/js/demo/chart-pie-demo.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
@@ -136,6 +133,11 @@
                 e.preventDefault();
             }else{
                 document.getElementById( value).submit();
+                Swal.fire(
+                    'You record deleted',
+                    '',
+                    'success'
+                    )
             }
         };
 
@@ -155,7 +157,7 @@
                 var min_sqft= $("#min_sqft").val();
 
                 $.ajax({
-                    url: 'sqfts/' + id,
+                    url: 'sqfts',
                     type: "POST",
                     data: {
                         id: id,
@@ -170,7 +172,12 @@
 
                         $('#companydata').trigger("reset");
                         $('#practice_modal').modal('hide');
-                        window.location.reload(true);
+                        Swal.fire(
+                            'You saved your record',
+                            '',
+                            'success'
+                            )
+                        ////window.location.reload(true);
                     }
                 });
             });
@@ -178,6 +185,12 @@
             $('body').on('click', '.btn-close', function(event) {
                 $("#practice_modal").modal("hide");
             });
+
+            $('body').on('click', '.btn-create', function(event) {
+                $('#color_id').val("");
+                $("#practice_modal").modal("show");
+            });
+            
 
             $('body').on('click', '.editCompany', function(event) {
 

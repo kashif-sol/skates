@@ -47,7 +47,7 @@ Route::post('store-form', [SettingController::class, 'store'])->name('store-form
 Route::get('sqfts',[SqftController::class,'index'])->name('sqfts');
 Route::post('store-sqft', [SqftController::class, 'store'])->name('store-sqft');
 Route::get('sqfts.edit/{id}',[SqftController::class,'edit'])->name('sqfts.edit');
-Route::post('sqfts/{id}',[SqftController::class,'update'])->name('sqfts.update');
+Route::post('sqfts',[SqftController::class,'update'])->name('sqfts.update');
 Route::delete('/sqft/{id}', [SqftController::class,'destroy']) ->name('sqfts.destroy');
 
 Route::get('skaters',[SqftController::class,'skaters'])->name('skaters');

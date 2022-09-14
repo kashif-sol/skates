@@ -277,7 +277,7 @@ class SqftController extends Controller
             'data' => $vendor
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // $validatedData = $request->validate([
         //     'sqft' => 'required|max:255',
@@ -285,7 +285,7 @@ class SqftController extends Controller
         // ]);
         Sqft::updateOrCreate(
             [
-                'id' => $id
+                'id' => $request->id
             ],
             [
                 'max_sqft' => $request->max_sqft,

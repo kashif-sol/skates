@@ -122,6 +122,8 @@ class ApiController extends Controller
      $rem_reminder3 = 0;
      foreach($vendor as $data){
         $size= $data->size;
+        // dd($data);
+        // dd($data->multiple);
        $figure= $data->multiple * $quotient_7;
     // 
        $hockey= $data->multiple * $quotient_3;

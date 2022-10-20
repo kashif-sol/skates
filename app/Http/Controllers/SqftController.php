@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ApiController;
 use App\Models\User; 
 use Illuminate\Support\Facades\Mail;
+use League\CommonMark\Extension\SmartPunct\Quote;
+use PDF;
 
 class SqftController extends Controller
 {
@@ -67,6 +69,13 @@ class SqftController extends Controller
         Mail::to($email)->send(new \App\Mail\SendQuotePrice($details));
         return redirect()->route('quotes_detail'  , [$request->quoteId]);
     }
+    public function save_shiiping_cost(Request $request){
+        $quote_detail = Quotes::find($request->quoteId);
+        $shipping_cost = $request->shipping_cost;
+        $quote_detail->shipping_cost = $shipping_cost;
+        $quote_detail->save();
+        return redirect()->route('quotes_detail'  , [$request->quoteId]);
+    }
 
     public function quotes_detail($quoteId)
     {
@@ -83,7 +92,7 @@ class SqftController extends Controller
     public function create_order($quoteId)
     {
         $quote_detail = Quotes::find($quoteId);
-        
+        // dd($quote_detail);
         $ApiController = new ApiController();
         $request = new \Illuminate\Http\Request();
         $request->replace(['cont' => 1,'length' => $quote_detail->length , 'width' => $quote_detail->width , 'ice_sheets' => $quote_detail->ice_sheet]);
@@ -94,6 +103,7 @@ class SqftController extends Controller
         $data['add_on'] = $quote_detail->addon_on;
         $data['addon_on_2'] = $quote_detail->addon_on_2;
         $data['addon_on_3'] = $quote_detail->addon_on_3;
+        $data['shipping_cost'] = $quote_detail->shipping_cost;
         $quote_tab_data =  QuoteSizes::where("quote_id" , $quoteId)->get()->toArray();
         $qty_data = [];
         if(!empty( $quote_tab_data ))
@@ -134,6 +144,8 @@ class SqftController extends Controller
         $add_on = $order_detail["add_on"];
         $addon_on_2 = $order_detail["addon_on_2"];
         $addon_on_3 = $order_detail["addon_on_3"];
+        $shipping_cost = $order_detail['shipping_cost'];
+        // dd($shipping_cost);
         $customer_address = $shop->api()->rest('GET', '/admin/api/2022-04/customers/'.$order_detail['customer_id'].'/addresses.json');
         $shipping_address = [];
         if(isset($customer_address["body"]["addresses"]))
@@ -154,9 +166,9 @@ class SqftController extends Controller
         }
         $tab_details = [];
         $hockeyPid = "";
-        $productsIds =  [7815410974959];
+        $productsIds =  [7446777528492];
         if( $rental_skates_needed < 150)
-            $productsIds =  [7815410385135];
+            $productsIds =  [7446777528492];
        
         /*
         if($order_detail['tab'] == "TAB1")
@@ -209,25 +221,26 @@ class SqftController extends Controller
                 */
             }
         }
+        // dd($line_items);
         
         if(isset( $add_on) &&  $add_on == 1)
         {
             $line_items[] = array(
-                "variant_id" => 43252231831791, 
+                "variant_id" => 42011141996716, 
                 "quantity" =>  1
             );
         }
         if(isset( $addon_on_2) &&  $addon_on_2 == 1)
         {
             $line_items[] = array(
-                "variant_id" => 43287282647279, 
+                "variant_id" => 42011142029484, 
                 "quantity" =>  1
             );
         }
         if(isset( $addon_on_3) &&  $addon_on_3 == 1)
         {
             $line_items[] = array(
-                "variant_id" => 43287298277615, 
+                "variant_id" => 42011142062252, 
                 "quantity" =>  1
             );
         }
@@ -241,12 +254,18 @@ class SqftController extends Controller
                 "financial_status " => "pending",
                 "line_items" =>$line_items,
                 "customer" => $customer,
+                "shipping_lines"=>[
+                    [   "code"=>"INT.TP",
+                        "price"=>$shipping_cost,
+                        "title"=> "Small Packet"
+                    ]
+                ]
               ///  "shipping_address" => $shipping_address
             )
         );
-       
+    //    dd(json_encode($order_data));
         $response = $shop->api()->rest('POST', '/admin/api/2022-04/orders.json',$order_data);
-       
+    //    dd($response);
         if($response['status'] == 201 || $response['status'] == 200)
         {   
             $id = $response['body']['container']['order']['id'];
@@ -256,6 +275,13 @@ class SqftController extends Controller
             return array("status" => "error" , "msg" => "There is issue in creating your order. Please try again!" , "link" => "");
         }
     }
+    public function createPDF($id) {
+       
+        $show = Quotes::find($id);
+        $pdf = PDF::loadView('pdf', compact('show'));
+        
+        return $pdf->download('quote.pdf');
+      }
 
     public function store(Request $request)
     {

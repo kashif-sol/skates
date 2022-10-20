@@ -14,6 +14,9 @@
                 <th scope="col">ice sheets</th>
                 <th scope="col">length</th>
                 <th scope="col">width</th>
+                <th scope="col">Add_On_1</th>
+                <th scope="col">Add_On_2</th>
+                <th scope="col">Add_On_3</th>
                 <th scope="col">Sq.feet</th>
                 <th scope="col">Rental Skates needed</th>
                 <th scope="col">Per Session</th>
@@ -29,6 +32,9 @@
                     <td>{{$quote_detail->ice_sheet}}</td>
                     <td>{{$quote_detail->length}}</td>
                     <td>{{$quote_detail->width}}</td>
+                    <td>@if(!empty($quote_detail->addon_on))yes @else No @endif</td>
+                    <td>@if(!empty($quote_detail->addon_on_2))yes @else No @endif</td>
+                    <td>@if(!empty($quote_detail->addon_on_3))yes @else No @endif</td>
                     <td>{{$data['total_sqfeet']}}</td> 
 
                     @if(isset($data))
@@ -52,7 +58,7 @@
 
         <div class="row  p-3">
             <h2>Tab Values</h2>
-            <form method="POST" action="{{route('edit-quote-tab')}}" >
+            <form method="POST" action="#" >
             <table class="table">
                 <thead>
                     <tr class="table-light">
@@ -169,15 +175,25 @@
 
     <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <form action="{{route('quote-send')}}"   method="GET">
                
                 <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
                 <label>Amount</label>
-                <input type="text" name="quoteAmount" id="quoteAmount" value="{{$quote_detail->amount}}" style="    width: 20%;">
+                <input type="text" name="quoteAmount" id="quoteAmount" value="{{$quote_detail->amount}}" >
                 <button type="submit" class="btn btn-primary">Send</button>
             </form>
         </div>
+        <div class="col-md-6">
+            <form action="{{route('save_shiiping_cost')}}"   method="GET">
+               
+                <input type="hidden" name="quoteId" value="{{$quote_detail->id}}" >
+                <label>Shipping Cost</label>
+                <input type="text" name="shipping_cost" id="shipping_cost" value="{{$quote_detail->shipping_cost}}">
+                <button type="submit" class="btn btn-primary">save</button>
+            </form>
+        </div>
+        
     </div>
     </div>
 

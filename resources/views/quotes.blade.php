@@ -35,6 +35,7 @@
                         @else 
                          <a href="#"  disabled class="btn btn-primary ml-2 disabled">Order Created</a>
                         @endif
+                        <a href="/quotepdf/{{$quote->id}}"  class="btn btn-primary">Export to PDF</a>
                     </td>
                 </tr>
             @endforeach
